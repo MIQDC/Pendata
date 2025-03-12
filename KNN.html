@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>TUGAS 1 &#8212; Penambangan Data</title>
+    <title>Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding &#8212; Penambangan Data</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pendat';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'KNN';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tugas 2" href="tugas2.html" />
-    <link rel="prev" title="Penambangan Data" href="intro.html" />
+    <link rel="next" title="CONTOH MENGHITUNG MANUAL LOF" href="LOF.html" />
+    <link rel="prev" title="Tugas 2" href="tugas2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -169,8 +169,9 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">TUGAS 1</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tugas2.html"><strong>Tugas 2</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1"><a class="reference internal" href="pendat.html">TUGAS 1</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="tugas2.html"><strong>Tugas 2</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LOF.html">CONTOH MENGHITUNG MANUAL LOF</a></li>
 </ul>
 </details></li>
@@ -250,7 +251,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpendat.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FKNN.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -280,7 +281,7 @@
       
       
       
-      <li><a href="_sources/pendat.ipynb" target="_blank"
+      <li><a href="_sources/KNN.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -354,7 +355,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>TUGAS 1</h1>
+    <h1>Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -368,8 +369,18 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tugas-1">
-<h1>TUGAS 1<a class="headerlink" href="#tugas-1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="deteksi-outlier-dengan-k-nearest-neighbors-knn-dalam-data-understanding">
+<h1>Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding<a class="headerlink" href="#deteksi-outlier-dengan-k-nearest-neighbors-knn-dalam-data-understanding" title="Link to this heading">#</a></h1>
+<p>Outlier detection adalah proses mengidentifikasi data yang secara signifikan berbeda dari mayoritas data lainnya dalam dataset. Salah satu metode yang umum digunakan untuk mendeteksi outlier adalah K-Nearest Neighbors (KNN), yang berbasis pada jarak antar titik data.</p>
+<p>Dalam data understanding, deteksi outlier sangat penting karena data yang mengandung outlier dapat mempengaruhi hasil analisis, menyebabkan bias dalam model machine learning, atau menunjukkan anomali yang perlu diperhatikan, seperti kesalahan pengukuran atau kejadian langka yang memiliki makna penting.</p>
+<p>Metode KNN untuk Deteksi Outlier bekerja dengan cara menghitung jarak antara suatu titik data dengan tetangga terdekatnya. Berikut langkah-langkahnya:</p>
+<ol class="arabic simple">
+<li><p>Menentukan jumlah tetangga terdekat (k): Biasanya nilai k dipilih berdasarkan eksperimen, sering kali antara 3 hingga 10.</p></li>
+<li><p>Menghitung jarak antar titik data: Jarak Euclidean atau metrik lain digunakan untuk mengukur kedekatan antar data.</p></li>
+<li><p>Menentukan threshold untuk outlier: Titik yang memiliki rata-rata jarak ke tetangganya jauh lebih besar dibandingkan nilai rata-rata dataset dianggap sebagai outlier. Biasanya threshold ditentukan sebagai rata-rata + 2 standar deviasi dari jarak antar titik.</p></li>
+<li><p>Visualisasi outlier: Hasil deteksi outlier sering divisualisasikan menggunakan scatter plot, di mana titik outlier diberi warna berbeda untuk memudahkan interpretasi.</p></li>
+</ol>
+<p>Pendekatan ini efektif dalam mendeteksi anomali lokal, yaitu titik data yang mungkin tidak terlihat aneh dalam distribusi global tetapi menyimpang dibandingkan dengan tetangganya. Teknik ini sering digunakan dalam analisis fraud, deteksi anomali sensor, dan pembersihan data sebelum analisis lebih lanjut.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pymysql
@@ -378,17 +389,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
-Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pymysql
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed pymysql-1.1.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/python/3.12.1/lib/python3.12/site-packages (1.1.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.3.1</span> -&gt; <span class=" -Color -Color-Green">25.0.1</span>
@@ -398,143 +399,10 @@ Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting psycopg2
-  Downloading psycopg2-2.9.10.tar.gz (385 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psycopg2 in /usr/local/python/3.12.1/lib/python3.12/site-packages (2.9.10)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Preparing metadata (setup.py) ... ?25l-
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25hBuilding wheels for collected packages: psycopg2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for psycopg2 (setup.py) ... ?25l-
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \ done
-?25h  Created wheel for psycopg2: filename=psycopg2-2.9.10-cp312-cp312-linux_x86_64.whl size=635533 sha256=6ffad5564f0b6686f5b228a939197794b7821cb19caac1dec8b9b69816b7f2e3
-  Stored in directory: /home/codespace/.cache/pip/wheels/ac/bb/ce/afa589c50b6004d3a06fc691e71bd09c9bd5f01e5921e5329b
-Successfully built psycopg2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: psycopg2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed psycopg2-2.9.10
-
-<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.3.1</span> -&gt; <span class=" -Color -Color-Green">25.0.1</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.3.1</span> -&gt; <span class=" -Color -Color-Green">25.0.1</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
@@ -543,6 +411,12 @@ Successfully built psycopg2
 </div>
 </div>
 </div>
+<p>digunakan untuk menginstal pustaka yang diperlukan agar Python dapat terhubung dengan database MySQL dan PostgreSQL.</p>
+<ul class="simple">
+<li><p>pymysql: Pustaka ini digunakan untuk menghubungkan Python dengan database MySQL. Dengan pymysql, kita bisa melakukan koneksi, menjalankan kueri SQL, mengambil data, dan memanipulasi tabel dalam database MySQL.</p></li>
+<li><p>psycopg2: Pustaka ini digunakan untuk menghubungkan Python dengan database PostgreSQL. Fungsi dan cara penggunaannya mirip dengan pymysql tetapi khusus untuk PostgreSQL.</p></li>
+</ul>
+<p>Simbol % di awal menunjukkan bahwa ini adalah magic command di Jupyter Notebook, yang memungkinkan pip dijalankan langsung dalam sel notebook untuk menginstal pustaka yang diperlukan tanpa perlu keluar dari Jupyter. Jika kode ini dijalankan di script Python biasa (misalnya .py)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
@@ -551,6 +425,7 @@ Successfully built psycopg2
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
 
 <span class="k">def</span> <span class="nf">get_pg_data</span><span class="p">():</span>
     <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
@@ -593,33 +468,54 @@ Successfully built psycopg2
 <span class="c1"># Gabungkan berdasarkan kolom &#39;id&#39; dan &#39;Class&#39;</span>
 <span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_mysql</span><span class="p">,</span> <span class="n">df_postgresql</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
 
+<span class="c1"># Ambil data fitur numerik</span>
+<span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_width&quot;</span><span class="p">]</span>
+<span class="n">data_values</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
 <span class="c1"># Cetak semua data hasil gabungan tanpa indeks</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_merged</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
-<span class="c1"># Visualisasi data</span>
-<span class="c1"># Scatter plot antar variabel</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_merged</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
+<span class="c1"># KNN Outlier Detection</span>
+<span class="k">def</span> <span class="nf">knn_outlier_detection</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">neigh</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">neigh</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">distances</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">neigh</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">avg_distances</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Ambil jarak k-terjauh sebagai skor</span>
+    <span class="k">return</span> <span class="n">avg_distances</span>
+
+<span class="c1"># Hitung K-NN distance</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;knn_distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">knn_outlier_detection</span><span class="p">(</span><span class="n">data_values</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Tentukan threshold sebagai nilai rata-rata + 2 standar deviasi</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;knn_distance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;knn_distance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier_knn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;knn_distance&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span>
+
+<span class="c1"># Cetak hasil</span>
+<span class="n">df_result</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;knn_distance&quot;</span><span class="p">,</span> <span class="s2">&quot;outlier_knn&quot;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_result</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">num_outliers</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier_knn&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah outlier: </span><span class="si">{</span><span class="n">num_outliers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cetak data outlier</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier_knn&quot;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data Outlier:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Visualisasi outlier berdasarkan K-NN</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">],</span>
+    <span class="n">hue</span><span class="o">=</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier_knn&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="kc">False</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Outlier Detection (Sepal) - KNN&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="c1"># Visualisasi data dengan boxplot per class</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_merged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df_merged</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boxplot Petal Length per Class&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_merged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df_merged</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boxplot Sepal Length per Class&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_merged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df_merged</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boxplot Petal Width per Class&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_merged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df_merged</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boxplot Sepal Width per Class&quot;</span><span class="p">)</span>
-
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;petal_width&quot;</span><span class="p">],</span>
+    <span class="n">hue</span><span class="o">=</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier_knn&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="kc">False</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Outlier Detection (Petal) - KNN&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -627,7 +523,7 @@ Successfully built psycopg2
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> id           class  petal_length  petal_width  sepal_length  sepal_width
   1     Iris-setosa           1.4          0.2           5.1          3.5
-  2     Iris-setosa           1.4          0.2           4.9          3.0
+  2     Iris-setosa          14.0          2.0          40.9         30.0
   3     Iris-setosa           1.3          0.2           4.7          3.2
   4     Iris-setosa           1.5          0.2           4.6          3.1
   5     Iris-setosa           1.4          0.2           5.0          3.6
@@ -776,13 +672,172 @@ Successfully built psycopg2
 148  Iris-virginica           5.2          2.0           6.5          3.0
 149  Iris-virginica           5.4          2.3           6.2          3.4
 150  Iris-virginica           5.1          1.8           5.9          3.0
+151             ???           5.1          3.2           5.8          1.0
+ id           class  petal_length  petal_width  sepal_length  sepal_width  knn_distance  outlier_knn
+  1     Iris-setosa           1.4          0.2           5.1          3.5      0.141421        False
+  2     Iris-setosa          14.0          2.0          40.9         30.0     43.517123         True
+  3     Iris-setosa           1.3          0.2           4.7          3.2      0.264575        False
+  4     Iris-setosa           1.5          0.2           4.6          3.1      0.244949        False
+  5     Iris-setosa           1.4          0.2           5.0          3.6      0.223607        False
+  6     Iris-setosa           1.7          0.4           5.4          3.9      0.374166        False
+  7     Iris-setosa           1.4          0.3           4.6          3.4      0.316228        False
+  8     Iris-setosa           1.5          0.2           5.0          3.4      0.200000        False
+  9     Iris-setosa           1.4          0.2           4.4          2.9      0.346410        False
+ 10     Iris-setosa           1.5          0.1           4.9          3.1      0.173205        False
+ 11     Iris-setosa           1.5          0.2           5.4          3.7      0.331662        False
+ 12     Iris-setosa           1.6          0.2           4.8          3.4      0.300000        False
+ 13     Iris-setosa           1.4          0.1           4.8          3.0      0.200000        False
+ 14     Iris-setosa           1.1          0.1           4.3          3.0      0.479583        False
+ 15     Iris-setosa           1.2          0.2           5.8          4.0      0.556776        False
+ 16     Iris-setosa           1.5          0.4           5.7          4.4      0.616441        False
+ 17     Iris-setosa           1.3          0.4           5.4          3.9      0.387298        False
+ 18     Iris-setosa           1.4          0.3           5.1          3.5      0.173205        False
+ 19     Iris-setosa           1.7          0.3           5.7          3.8      0.509902        False
+ 20     Iris-setosa           1.5          0.3           5.1          3.8      0.264575        False
+ 21     Iris-setosa           1.7          0.2           5.4          3.4      0.360555        False
+ 22     Iris-setosa           1.5          0.4           5.1          3.7      0.264575        False
+ 23     Iris-setosa           1.0          0.2           4.6          3.6      0.538516        False
+ 24     Iris-setosa           1.7          0.5           5.1          3.3      0.387298        False
+ 25     Iris-setosa           1.9          0.2           4.8          3.4      0.424264        False
+ 26     Iris-setosa           1.6          0.2           5.0          3.0      0.223607        False
+ 27     Iris-setosa           1.6          0.4           5.0          3.4      0.244949        False
+ 28     Iris-setosa           1.5          0.2           5.2          3.5      0.173205        False
+ 29     Iris-setosa           1.4          0.2           5.2          3.4      0.173205        False
+ 30     Iris-setosa           1.6          0.2           4.7          3.2      0.223607        False
+ 31     Iris-setosa           1.6          0.2           4.8          3.1      0.173205        False
+ 32     Iris-setosa           1.5          0.4           5.4          3.4      0.316228        False
+ 33     Iris-setosa           1.5          0.1           5.2          4.1      0.424264        False
+ 34     Iris-setosa           1.4          0.2           5.5          4.2      0.412311        False
+ 35     Iris-setosa           1.5          0.1           4.9          3.1      0.173205        False
+ 36     Iris-setosa           1.2          0.2           5.0          3.2      0.346410        False
+ 37     Iris-setosa           1.3          0.2           5.5          3.5      0.346410        False
+ 38     Iris-setosa           1.5          0.1           4.9          3.1      0.173205        False
+ 39     Iris-setosa           1.3          0.2           4.4          3.0      0.300000        False
+ 40     Iris-setosa           1.5          0.2           5.1          3.4      0.141421        False
+ 41     Iris-setosa           1.3          0.3           5.0          3.5      0.244949        False
+ 42     Iris-setosa           1.3          0.3           4.5          2.3      0.781025        False
+ 43     Iris-setosa           1.3          0.2           4.4          3.2      0.300000        False
+ 44     Iris-setosa           1.6          0.6           5.0          3.5      0.374166        False
+ 45     Iris-setosa           1.9          0.4           5.1          3.8      0.412311        False
+ 46     Iris-setosa           1.4          0.3           4.8          3.0      0.264575        False
+ 47     Iris-setosa           1.6          0.2           5.1          3.8      0.300000        False
+ 48     Iris-setosa           1.4          0.2           4.6          3.2      0.223607        False
+ 49     Iris-setosa           1.5          0.2           5.3          3.7      0.244949        False
+ 50     Iris-setosa           1.4          0.2           5.0          3.3      0.223607        False
+ 51 Iris-versicolor           4.7          1.4           7.0          3.2      0.458258        False
+ 52 Iris-versicolor           4.5          1.5           6.4          3.2      0.374166        False
+ 53 Iris-versicolor           4.9          1.5           6.9          3.1      0.346410        False
+ 54 Iris-versicolor           4.0          1.3           5.5          2.3      0.435890        False
+ 55 Iris-versicolor           4.6          1.5           6.5          2.8      0.374166        False
+ 56 Iris-versicolor           4.5          1.3           5.7          2.8      0.331662        False
+ 57 Iris-versicolor           4.7          1.6           6.3          3.3      0.458258        False
+ 58 Iris-versicolor           3.3          1.0           4.9          2.4      0.721110        False
+ 59 Iris-versicolor           4.6          1.3           6.6          2.9      0.316228        False
+ 60 Iris-versicolor           3.9          1.4           5.2          2.7      0.529150        False
+ 61 Iris-versicolor           3.5          1.0           5.0          2.0      0.714143        False
+ 62 Iris-versicolor           4.2          1.5           5.9          3.0      0.360555        False
+ 63 Iris-versicolor           4.0          1.0           6.0          2.2      0.583095        False
+ 64 Iris-versicolor           4.7          1.4           6.1          2.9      0.424264        False
+ 65 Iris-versicolor           3.6          1.3           5.6          2.9      0.519615        False
+ 66 Iris-versicolor           4.4          1.4           6.7          3.1      0.346410        False
+ 67 Iris-versicolor           4.5          1.5           5.6          3.0      0.412311        False
+ 68 Iris-versicolor           4.1          1.0           5.8          2.7      0.360555        False
+ 69 Iris-versicolor           4.5          1.5           6.2          2.2      0.678233        False
+ 70 Iris-versicolor           3.9          1.1           5.6          2.5      0.264575        False
+ 71 Iris-versicolor           4.8          1.8           5.9          3.2      0.424264        False
+ 72 Iris-versicolor           4.0          1.3           6.1          2.8      0.400000        False
+ 73 Iris-versicolor           4.9          1.5           6.3          2.5      0.424264        False
+ 74 Iris-versicolor           4.7          1.2           6.1          2.8      0.435890        False
+ 75 Iris-versicolor           4.3          1.3           6.4          2.9      0.387298        False
+ 76 Iris-versicolor           4.4          1.4           6.6          3.0      0.316228        False
+ 77 Iris-versicolor           4.8          1.4           6.8          2.8      0.374166        False
+ 78 Iris-versicolor           5.0          1.7           6.7          3.0      0.424264        False
+ 79 Iris-versicolor           4.5          1.5           6.0          2.9      0.346410        False
+ 80 Iris-versicolor           3.5          1.0           5.7          2.6      0.447214        False
+ 81 Iris-versicolor           3.8          1.1           5.5          2.4      0.300000        False
+ 82 Iris-versicolor           3.7          1.0           5.5          2.4      0.435890        False
+ 83 Iris-versicolor           3.9          1.2           5.8          2.7      0.300000        False
+ 84 Iris-versicolor           5.1          1.6           6.0          2.7      0.374166        False
+ 85 Iris-versicolor           4.5          1.5           5.4          3.0      0.489898        False
+ 86 Iris-versicolor           4.5          1.6           6.0          3.4      0.469042        False
+ 87 Iris-versicolor           4.7          1.5           6.7          3.1      0.331662        False
+ 88 Iris-versicolor           4.4          1.3           6.3          2.3      0.608276        False
+ 89 Iris-versicolor           4.1          1.3           5.6          3.0      0.316228        False
+ 90 Iris-versicolor           4.0          1.3           5.5          2.5      0.300000        False
+ 91 Iris-versicolor           4.4          1.2           5.5          2.6      0.424264        False
+ 92 Iris-versicolor           4.6          1.4           6.1          3.0      0.346410        False
+ 93 Iris-versicolor           4.0          1.2           5.8          2.6      0.264575        False
+ 94 Iris-versicolor           3.3          1.0           5.0          2.3      0.648074        False
+ 95 Iris-versicolor           4.2          1.3           5.6          2.7      0.300000        False
+ 96 Iris-versicolor           4.2          1.2           5.7          3.0      0.331662        False
+ 97 Iris-versicolor           4.2          1.3           5.7          2.9      0.223607        False
+ 98 Iris-versicolor           4.3          1.3           6.2          2.9      0.346410        False
+ 99 Iris-versicolor           3.0          1.1           5.1          2.5      0.793725        False
+100 Iris-versicolor           4.1          1.3           5.7          2.8      0.244949        False
+101  Iris-virginica           6.0          2.5           6.3          3.3      0.556776        False
+102  Iris-virginica           5.1          1.9           5.8          2.7      0.331662        False
+103  Iris-virginica           5.9          2.1           7.1          3.0      0.458258        False
+104  Iris-virginica           5.6          1.8           6.3          2.9      0.387298        False
+105  Iris-virginica           5.8          2.2           6.5          3.0      0.387298        False
+106  Iris-virginica           6.6          2.1           7.6          3.0      0.547723        False
+107  Iris-virginica           4.5          1.7           4.9          2.5      0.877496        False
+108  Iris-virginica           6.3          1.8           7.3          2.9      0.547723        False
+109  Iris-virginica           5.8          1.8           6.7          2.5      0.616441        False
+110  Iris-virginica           6.1          2.5           7.2          3.6      0.754983        False
+111  Iris-virginica           5.1          2.0           6.5          3.2      0.424264        False
+112  Iris-virginica           5.3          1.9           6.4          2.7      0.387298        False
+113  Iris-virginica           5.5          2.1           6.8          3.0      0.374166        False
+114  Iris-virginica           5.0          2.0           5.7          2.5      0.519615        False
+115  Iris-virginica           5.1          2.4           5.8          2.8      0.519615        False
+116  Iris-virginica           5.3          2.3           6.4          3.2      0.387298        False
+117  Iris-virginica           5.5          1.8           6.5          3.0      0.387298        False
+118  Iris-virginica           6.7          2.2           7.7          3.8      1.004988        False
+119  Iris-virginica           6.9          2.3           7.7          2.6      0.927362        False
+120  Iris-virginica           5.0          1.5           6.0          2.2      0.583095        False
+121  Iris-virginica           5.7          2.3           6.9          3.2      0.300000        False
+122  Iris-virginica           4.9          2.0           5.6          2.8      0.458258        False
+123  Iris-virginica           6.7          2.0           7.7          2.8      0.678233        False
+124  Iris-virginica           4.9          1.8           6.3          2.7      0.360555        False
+125  Iris-virginica           5.7          2.1           6.7          3.3      0.374166        False
+126  Iris-virginica           6.0          1.8           7.2          3.2      0.469042        False
+127  Iris-virginica           4.8          1.8           6.2          2.8      0.387298        False
+128  Iris-virginica           4.9          1.8           6.1          3.0      0.300000        False
+129  Iris-virginica           5.6          2.1           6.4          2.8      0.374166        False
+130  Iris-virginica           5.8          1.6           7.2          3.0      0.556776        False
+131  Iris-virginica           6.1          1.9           7.4          2.8      0.509902        False
+132  Iris-virginica           6.4          2.0           7.9          3.8      0.932738        False
+133  Iris-virginica           5.6          2.2           6.4          2.8      0.435890        False
+134  Iris-virginica           5.1          1.5           6.3          2.8      0.435890        False
+135  Iris-virginica           5.6          1.4           6.1          2.6      0.663325        False
+136  Iris-virginica           6.1          2.3           7.7          3.0      0.678233        False
+137  Iris-virginica           5.6          2.4           6.3          3.4      0.435890        False
+138  Iris-virginica           5.5          1.8           6.4          3.1      0.435890        False
+139  Iris-virginica           4.8          1.8           6.0          3.0      0.316228        False
+140  Iris-virginica           5.4          2.1           6.9          3.1      0.374166        False
+141  Iris-virginica           5.6          2.4           6.7          3.1      0.346410        False
+142  Iris-virginica           5.1          2.3           6.9          3.1      0.509902        False
+143  Iris-virginica           5.1          1.9           5.8          2.7      0.331662        False
+144  Iris-virginica           5.9          2.3           6.8          3.2      0.346410        False
+145  Iris-virginica           5.7          2.5           6.7          3.3      0.400000        False
+146  Iris-virginica           5.2          2.3           6.7          3.0      0.374166        False
+147  Iris-virginica           5.0          1.9           6.3          2.5      0.412311        False
+148  Iris-virginica           5.2          2.0           6.5          3.0      0.360555        False
+149  Iris-virginica           5.4          2.3           6.2          3.4      0.616441        False
+150  Iris-virginica           5.1          1.8           5.9          3.0      0.331662        False
+151             ???           5.1          3.2           5.8          1.0      2.092845        False
+
+Jumlah outlier: 1
+
+Data Outlier:
+ id       class  petal_length  petal_width  sepal_length  sepal_width  knn_distance  outlier_knn
+  2 Iris-setosa          14.0          2.0          40.9         30.0     43.517123         True
 </pre></div>
 </div>
-<img alt="_images/fc37378b28680ddf2b2e3b99814f1ab975c634f372709992f8a29010953a6aa1.png" src="_images/fc37378b28680ddf2b2e3b99814f1ab975c634f372709992f8a29010953a6aa1.png" />
-<img alt="_images/63c55f615b88a4bbc26b3e0045d668844fe3495407a57a1d3d226e0f0e790814.png" src="_images/63c55f615b88a4bbc26b3e0045d668844fe3495407a57a1d3d226e0f0e790814.png" />
-<img alt="_images/c228bb3c9f64709d367b64eabfbb051b00debee83162c28e485a68622daf6e38.png" src="_images/c228bb3c9f64709d367b64eabfbb051b00debee83162c28e485a68622daf6e38.png" />
+<img alt="_images/ea717eacf735acfbb9e486fb38052cc08f06c8e817f1bbc8c2053b7511809ee0.png" src="_images/ea717eacf735acfbb9e486fb38052cc08f06c8e817f1bbc8c2053b7511809ee0.png" />
+<img alt="_images/5cad558ca8ec1427401bfcaa8a54d25043144b57833daa86d0c31fb8853a524f.png" src="_images/5cad558ca8ec1427401bfcaa8a54d25043144b57833daa86d0c31fb8853a524f.png" />
 </div>
 </div>
+<p>Kode di atas digunakan untuk mendeteksi outlier dalam dataset Iris menggunakan metode K-Nearest Neighbors (KNN) berbasis jarak. Pertama, pymysql dan psycopg2 diinstal untuk memungkinkan koneksi ke database MySQL dan PostgreSQL. Kemudian, dua fungsi get_pg_data() dan get_mysql_data() dibuat untuk mengambil data dari tabel iris_postgresql di PostgreSQL dan irismysql di MySQL. Setelah data diambil, kedua dataset digabungkan berdasarkan kolom “id” dan “class” menggunakan metode inner join. Selanjutnya, hanya fitur numerik seperti petal_length, petal_width, sepal_length, dan sepal_width yang digunakan dalam deteksi outlier. Fungsi knn_outlier_detection() menggunakan algoritma K-Nearest Neighbors (KNN) dengan k=5 untuk menghitung jarak rata-rata titik ke tetangga terjauh, yang kemudian digunakan sebagai skor outlier. Nilai threshold untuk menentukan outlier dihitung sebagai rata-rata jarak + 2 standar deviasi, dan titik dengan jarak melebihi threshold diklasifikasikan sebagai outlier. Hasil deteksi outlier dicetak dalam bentuk tabel, menampilkan fitur numerik, skor jarak KNN, dan status apakah data merupakan outlier atau tidak. Terakhir, visualisasi dilakukan menggunakan Seaborn dan Matplotlib dengan scatter plot, di mana outlier ditandai dengan warna merah, sedangkan data normal berwarna biru.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -816,20 +871,20 @@ Successfully built psycopg2
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="tugas2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Penambangan Data</p>
+        <p class="prev-next-title"><strong>Tugas 2</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="tugas2.html"
+       href="LOF.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Tugas 2</strong></p>
+        <p class="prev-next-title">CONTOH MENGHITUNG MANUAL LOF</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
