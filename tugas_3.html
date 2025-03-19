@@ -1,0 +1,1545 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Penambangan Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tugas_3';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Deteksi Outlier dengan Metode Local Outlier Factor (LOF) dalam Data Understanding" href="LOF.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo3.jpg" class="logo__image only-light" alt="Penambangan Data - Home"/>
+    <img src="_static/logo3.jpg" class="logo__image only-dark pst-js-only" alt="Penambangan Data - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Penambangan Data
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pendat.html">TUGAS 1</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tugas2.html"><strong>Tugas 2</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="KNN.html">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LOF.html">Deteksi Outlier dengan Metode Local Outlier Factor (LOF) dalam Data Understanding</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftugas_3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/tugas_3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pymysql
+<span class="o">%</span><span class="k">pip</span> install psycopg2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /usr/local/python/3.12.1/lib/python3.12/site-packages (1.1.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.3.1</span> -&gt; <span class=" -Color -Color-Green">25.0.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psycopg2 in /usr/local/python/3.12.1/lib/python3.12/site-packages (2.9.10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">24.3.1</span> -&gt; <span class=" -Color -Color-Green">25.0.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+<p>berfungsi untuk menginstal dua pustaka Python, yaitu pymysql dan psycopg2, menggunakan pip, yang merupakan manajer paket untuk Python.</p>
+<ul class="simple">
+<li><p>pymysql adalah pustaka yang digunakan untuk terhubung dan berinteraksi dengan database MySQL menggunakan Python.</p></li>
+<li><p>psycopg2 adalah pustaka yang digunakan untuk menghubungkan dan menjalankan query pada database PostgreSQL dari Python.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="kn">from</span> <span class="nn">matplotlib.legend_handler</span> <span class="kn">import</span> <span class="n">HandlerPathCollection</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">euclidean</span>
+
+<span class="k">def</span> <span class="nf">get_pg_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;pg-24ccfcfa-iqbal.i.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_7h7RaEuETy6xtaTdGPL&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;defaultdb&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_data&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>  <span class="c1"># Ambil nama kolom</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_mysql_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;mysql-207e66db-iqbal.h.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_moPYLh4RrOq11aEBY_x&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_dataset&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>  <span class="c1"># Ambil nama kolom</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Ambil data dari kedua database</span>
+<span class="n">df_postgresql</span> <span class="o">=</span> <span class="n">get_pg_data</span><span class="p">()</span>
+<span class="n">df_mysql</span> <span class="o">=</span> <span class="n">get_mysql_data</span><span class="p">()</span>
+
+<span class="c1"># Gabungkan berdasarkan kolom &#39;id&#39; dan &#39;Class&#39;</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_mysql</span><span class="p">,</span> <span class="n">df_postgresql</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+
+<span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_width&quot;</span><span class="p">]</span>
+<span class="n">data_values</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Cetak semua data hasil gabungan tanpa indeks</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_merged</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Menerapkan Local Outlier Factor untuk deteksi outlier</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_merged</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># Mengambil fitur numerik</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;outlier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menandai outlier (-1) dan non-outlier (1)</span>
+<span class="n">X_scores</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">negative_outlier_factor_</span>
+
+<span class="c1"># Menampilkan tabel ID dan status outlier</span>
+<span class="n">outlier_table</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;outlier&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabel ID dan Status Outlier:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outlier_table</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Menampilkan jumlah outlier</span>
+<span class="n">total_outliers</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah outlier yang terdeteksi: </span><span class="si">{</span><span class="n">total_outliers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> id           class  petal_length  petal_width  sepal_length  sepal_width
+  1     Iris-setosa          64.0         72.0          85.1         93.5
+  2     Iris-setosa          14.0          2.0         904.9        309.1
+  3     Iris-setosa          10.3         50.2         584.7        803.2
+  4     Iris-setosa          31.5          4.2         304.6        163.1
+  5     Iris-setosa          49.4          3.2         605.0        703.6
+  6     Iris-setosa           1.7          0.4           5.4          3.9
+  7     Iris-setosa           1.4          0.3           4.0          3.4
+  8     Iris-setosa           1.5          0.2           5.0          3.4
+  9     Iris-setosa           1.4          0.2           4.4          2.9
+ 10     Iris-setosa           1.5          0.4           4.9          3.1
+ 11     Iris-setosa           1.5          0.3           5.4          3.7
+ 12     Iris-setosa           1.6          0.2           4.8          3.4
+ 13     Iris-setosa           1.3          0.4           4.8          3.0
+ 14     Iris-setosa           1.0          0.2           4.3          3.0
+ 15     Iris-setosa           1.2          0.2           5.8          4.0
+ 16     Iris-setosa           1.5          0.4           5.7          4.0
+ 17     Iris-setosa           1.3          0.4           4.0          3.9
+ 18     Iris-setosa           1.4          0.3           5.1          3.5
+ 19     Iris-setosa           1.7          0.3           5.7          3.8
+ 20     Iris-setosa           1.5          0.3           5.1          3.8
+ 21     Iris-setosa           1.7          0.2           5.4          3.4
+ 22     Iris-setosa           1.5          0.4           5.1          3.7
+ 23     Iris-setosa           1.0          0.2           4.6          3.6
+ 24     Iris-setosa           1.7          0.5           5.1          3.3
+ 25     Iris-setosa           1.9          0.2           4.8          3.4
+ 26     Iris-setosa           1.6          0.2           5.0          3.0
+ 27     Iris-setosa           1.6          0.4           5.0          3.4
+ 28     Iris-setosa           1.5          0.2           5.2          3.5
+ 29     Iris-setosa           1.4          0.2           5.2          3.4
+ 30     Iris-setosa           1.6          0.2           4.7          3.2
+ 31     Iris-setosa           1.6          0.2           4.8          3.1
+ 32     Iris-setosa           1.5          0.4           5.4          3.4
+ 33     Iris-setosa           1.5          0.1           5.2          4.1
+ 34     Iris-setosa           1.4          0.2           5.5          4.2
+ 35     Iris-setosa           1.5          0.1           4.9          3.1
+ 36     Iris-setosa           1.2          0.2           5.0          3.2
+ 37     Iris-setosa           1.3          0.2           5.5          3.5
+ 38     Iris-setosa           1.5          0.1           4.9          3.1
+ 39     Iris-setosa           1.3          0.2           4.4          3.0
+ 40     Iris-setosa           1.5          0.2           5.1          3.4
+ 41     Iris-setosa           1.3          0.3           5.0          3.5
+ 42     Iris-setosa           1.3          0.3           4.5          2.3
+ 43     Iris-setosa           1.3          0.2           4.4          3.2
+ 44     Iris-setosa           1.6          0.6           5.0          3.5
+ 45     Iris-setosa           1.9          0.4           5.1          3.8
+ 46     Iris-setosa           1.4          0.3           4.8          3.0
+ 47     Iris-setosa           1.6          0.2           5.1          3.8
+ 48     Iris-setosa           1.4          0.2           4.6          3.2
+ 49     Iris-setosa           1.5          0.2           5.3          3.7
+ 50     Iris-setosa           1.4          0.2           5.0          3.3
+ 51 Iris-versicolor           4.7          1.4           7.0          3.2
+ 52 Iris-versicolor           4.5          1.5           6.4          3.2
+ 53 Iris-versicolor           4.9          1.5           6.9          3.1
+ 54 Iris-versicolor           4.0          1.3           5.5          2.3
+ 55 Iris-versicolor           4.6          1.5           6.5          2.8
+ 56 Iris-versicolor           4.5          1.3           5.7          2.8
+ 57 Iris-versicolor           4.7          1.6           6.3          3.3
+ 58 Iris-versicolor           3.3          1.0           4.9          2.4
+ 59 Iris-versicolor           4.6          1.3           6.6          2.9
+ 60 Iris-versicolor           3.9          1.4           5.2          2.7
+ 61 Iris-versicolor           3.5          1.0           5.0          2.0
+ 62 Iris-versicolor           4.2          1.5           5.9          3.0
+ 63 Iris-versicolor           4.0          1.0           6.0          2.2
+ 64 Iris-versicolor           4.7          1.4           6.1          2.9
+ 65 Iris-versicolor           3.6          1.3           5.6          2.9
+ 66 Iris-versicolor           4.4          1.4           6.7          3.1
+ 67 Iris-versicolor           4.5          1.5           5.6          3.0
+ 68 Iris-versicolor           4.1          1.0           5.8          2.7
+ 69 Iris-versicolor           4.5          1.5           6.2          2.2
+ 70 Iris-versicolor           3.9          1.1           5.6          2.5
+ 71 Iris-versicolor           4.8          1.8           5.9          3.2
+ 72 Iris-versicolor           4.0          1.3           6.1          2.8
+ 73 Iris-versicolor           4.9          1.5           6.3          2.5
+ 74 Iris-versicolor           4.7          1.2           6.1          2.8
+ 75 Iris-versicolor           4.3          1.3           6.4          2.9
+ 76 Iris-versicolor           4.4          1.4           6.6          3.0
+ 77 Iris-versicolor           4.8          1.4           6.8          2.8
+ 78 Iris-versicolor           5.0          1.7           6.7          3.0
+ 79 Iris-versicolor           4.5          1.5           6.0          2.9
+ 80 Iris-versicolor           3.5          1.0           5.7          2.6
+ 81 Iris-versicolor           3.8          1.1           5.5          2.4
+ 82 Iris-versicolor           3.7          1.0           5.5          2.4
+ 83 Iris-versicolor           3.9          1.2           5.8          2.7
+ 84 Iris-versicolor           5.1          1.6           6.0          2.7
+ 85 Iris-versicolor           4.5          1.5           5.4          3.0
+ 86 Iris-versicolor           4.5          1.6           6.0          3.4
+ 87 Iris-versicolor           4.7          1.5           6.7          3.1
+ 88 Iris-versicolor           4.4          1.3           6.3          2.3
+ 89 Iris-versicolor           4.1          1.3           5.6          3.0
+ 90 Iris-versicolor           4.0          1.3           5.5          2.5
+ 91 Iris-versicolor           4.4          1.2           5.5          2.6
+ 92 Iris-versicolor           4.6          1.4           6.1          3.0
+ 93 Iris-versicolor           4.0          1.2           5.8          2.6
+ 94 Iris-versicolor           3.3          1.0           5.0          2.3
+ 95 Iris-versicolor           4.2          1.3           5.6          2.7
+ 96 Iris-versicolor         403.2        201.2          85.7         93.0
+ 97 Iris-versicolor         104.2        101.3          85.7         92.9
+ 98 Iris-versicolor         924.3         91.3          86.2         92.9
+ 99 Iris-versicolor          93.0        801.1          85.1         92.5
+100 Iris-versicolor          94.1        801.3          58.7        102.8
+101  Iris-virginica           6.0          2.5           6.3          3.3
+102  Iris-virginica           5.1          1.9           5.8          2.7
+103  Iris-virginica           5.9          2.1           7.1          3.0
+104  Iris-virginica           5.6          1.8           6.3          2.9
+105  Iris-virginica           5.8          2.2           6.5          3.0
+106  Iris-virginica           6.6          2.1           7.6          3.0
+107  Iris-virginica           4.5          1.7           4.9          2.5
+108  Iris-virginica           6.3          1.8           7.3          2.9
+109  Iris-virginica           5.8          1.8           6.7          2.5
+110  Iris-virginica           6.1          2.5           7.2          3.6
+111  Iris-virginica           5.1          2.0           6.5          3.2
+112  Iris-virginica           5.3          1.9           6.4          2.7
+113  Iris-virginica           5.5          2.1           6.8          3.0
+114  Iris-virginica           5.0          2.0           5.7          2.5
+115  Iris-virginica           5.1          2.4           5.8          2.8
+116  Iris-virginica           5.3          2.3           6.4          3.2
+117  Iris-virginica           5.5          1.8           6.5          3.0
+118  Iris-virginica          96.7         82.2          87.7         93.8
+119  Iris-virginica          96.9         82.3          97.7         92.6
+120  Iris-virginica           5.0          1.5           6.0          2.2
+121  Iris-virginica           5.7          2.3           6.9          3.2
+122  Iris-virginica           4.9          2.0           5.6          2.8
+123  Iris-virginica          96.7         92.0          97.7         82.8
+124  Iris-virginica           4.9          1.8           6.3          2.7
+125  Iris-virginica           5.7          2.1           6.7          3.3
+126  Iris-virginica           6.0          1.8           7.2          3.2
+127  Iris-virginica           4.8          1.8           6.2          2.8
+128  Iris-virginica           4.9          1.8           6.1          3.0
+129  Iris-virginica           5.6          2.1           6.4          2.8
+130  Iris-virginica           5.8          1.6           7.2          3.0
+131  Iris-virginica           6.1          1.9           7.4          2.8
+132  Iris-virginica          96.4         82.0          97.9         93.8
+133  Iris-virginica           5.6          2.2           6.4          2.8
+134  Iris-virginica           5.1          1.5           6.3          2.8
+135  Iris-virginica           5.6          1.4           6.1          2.6
+136  Iris-virginica           6.1          2.3           7.7          3.0
+137  Iris-virginica           5.6          2.4           6.3          3.4
+138  Iris-virginica           5.5          1.8           6.4          3.1
+139  Iris-virginica           4.8          1.8           6.0          3.0
+140  Iris-virginica           5.4          2.1           6.9          3.1
+141  Iris-virginica           5.6          2.4           6.7          3.1
+142  Iris-virginica           5.1          2.3           6.9          3.1
+143  Iris-virginica           5.1          1.9           5.8          2.7
+144  Iris-virginica           5.9          2.3           6.8          3.2
+145  Iris-virginica           5.7          2.5           6.7          3.3
+146  Iris-virginica           5.2          2.3           6.7          3.0
+147  Iris-virginica           5.0          1.9           6.3          2.5
+148  Iris-virginica           5.2          2.0           6.5          3.0
+149  Iris-virginica           5.4          2.3           6.2          3.4
+150  Iris-virginica          95.1        101.8         500.9        493.0
+
+Tabel ID dan Status Outlier:
+ id           class  outlier
+  1     Iris-setosa       -1
+  2     Iris-setosa       -1
+  3     Iris-setosa       -1
+  4     Iris-setosa       -1
+  5     Iris-setosa       -1
+  6     Iris-setosa        1
+  7     Iris-setosa        1
+  8     Iris-setosa        1
+  9     Iris-setosa        1
+ 10     Iris-setosa        1
+ 11     Iris-setosa        1
+ 12     Iris-setosa        1
+ 13     Iris-setosa        1
+ 14     Iris-setosa        1
+ 15     Iris-setosa        1
+ 16     Iris-setosa        1
+ 17     Iris-setosa        1
+ 18     Iris-setosa        1
+ 19     Iris-setosa        1
+ 20     Iris-setosa        1
+ 21     Iris-setosa        1
+ 22     Iris-setosa        1
+ 23     Iris-setosa        1
+ 24     Iris-setosa        1
+ 25     Iris-setosa        1
+ 26     Iris-setosa        1
+ 27     Iris-setosa        1
+ 28     Iris-setosa        1
+ 29     Iris-setosa        1
+ 30     Iris-setosa        1
+ 31     Iris-setosa        1
+ 32     Iris-setosa        1
+ 33     Iris-setosa        1
+ 34     Iris-setosa        1
+ 35     Iris-setosa        1
+ 36     Iris-setosa        1
+ 37     Iris-setosa        1
+ 38     Iris-setosa        1
+ 39     Iris-setosa        1
+ 40     Iris-setosa        1
+ 41     Iris-setosa        1
+ 42     Iris-setosa        1
+ 43     Iris-setosa        1
+ 44     Iris-setosa        1
+ 45     Iris-setosa        1
+ 46     Iris-setosa        1
+ 47     Iris-setosa        1
+ 48     Iris-setosa        1
+ 49     Iris-setosa        1
+ 50     Iris-setosa        1
+ 51 Iris-versicolor        1
+ 52 Iris-versicolor        1
+ 53 Iris-versicolor        1
+ 54 Iris-versicolor        1
+ 55 Iris-versicolor        1
+ 56 Iris-versicolor        1
+ 57 Iris-versicolor        1
+ 58 Iris-versicolor        1
+ 59 Iris-versicolor        1
+ 60 Iris-versicolor        1
+ 61 Iris-versicolor        1
+ 62 Iris-versicolor        1
+ 63 Iris-versicolor        1
+ 64 Iris-versicolor        1
+ 65 Iris-versicolor        1
+ 66 Iris-versicolor        1
+ 67 Iris-versicolor        1
+ 68 Iris-versicolor        1
+ 69 Iris-versicolor        1
+ 70 Iris-versicolor        1
+ 71 Iris-versicolor        1
+ 72 Iris-versicolor        1
+ 73 Iris-versicolor        1
+ 74 Iris-versicolor        1
+ 75 Iris-versicolor        1
+ 76 Iris-versicolor        1
+ 77 Iris-versicolor        1
+ 78 Iris-versicolor        1
+ 79 Iris-versicolor        1
+ 80 Iris-versicolor        1
+ 81 Iris-versicolor        1
+ 82 Iris-versicolor        1
+ 83 Iris-versicolor        1
+ 84 Iris-versicolor        1
+ 85 Iris-versicolor        1
+ 86 Iris-versicolor        1
+ 87 Iris-versicolor        1
+ 88 Iris-versicolor        1
+ 89 Iris-versicolor        1
+ 90 Iris-versicolor        1
+ 91 Iris-versicolor        1
+ 92 Iris-versicolor        1
+ 93 Iris-versicolor        1
+ 94 Iris-versicolor        1
+ 95 Iris-versicolor        1
+ 96 Iris-versicolor       -1
+ 97 Iris-versicolor       -1
+ 98 Iris-versicolor       -1
+ 99 Iris-versicolor       -1
+100 Iris-versicolor       -1
+101  Iris-virginica        1
+102  Iris-virginica        1
+103  Iris-virginica        1
+104  Iris-virginica        1
+105  Iris-virginica        1
+106  Iris-virginica        1
+107  Iris-virginica        1
+108  Iris-virginica        1
+109  Iris-virginica        1
+110  Iris-virginica        1
+111  Iris-virginica        1
+112  Iris-virginica        1
+113  Iris-virginica        1
+114  Iris-virginica        1
+115  Iris-virginica        1
+116  Iris-virginica        1
+117  Iris-virginica        1
+118  Iris-virginica       -1
+119  Iris-virginica       -1
+120  Iris-virginica        1
+121  Iris-virginica        1
+122  Iris-virginica        1
+123  Iris-virginica       -1
+124  Iris-virginica        1
+125  Iris-virginica        1
+126  Iris-virginica        1
+127  Iris-virginica        1
+128  Iris-virginica        1
+129  Iris-virginica        1
+130  Iris-virginica        1
+131  Iris-virginica        1
+132  Iris-virginica       -1
+133  Iris-virginica        1
+134  Iris-virginica        1
+135  Iris-virginica        1
+136  Iris-virginica        1
+137  Iris-virginica        1
+138  Iris-virginica        1
+139  Iris-virginica        1
+140  Iris-virginica        1
+141  Iris-virginica        1
+142  Iris-virginica        1
+143  Iris-virginica        1
+144  Iris-virginica        1
+145  Iris-virginica        1
+146  Iris-virginica        1
+147  Iris-virginica        1
+148  Iris-virginica        1
+149  Iris-virginica        1
+150  Iris-virginica       -1
+Jumlah outlier yang terdeteksi: 15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kode di atas bertujuan untuk mengambil data dari dua database, yaitu PostgreSQL dan MySQL, kemudian menggabungkannya dan mendeteksi outlier menggunakan metode Local Outlier Factor (LOF). Data pertama diambil melalui fungsi get_pg_data(), yang mengakses tabel iris_data dari PostgreSQL, dan fungsi get_mysql_data(), yang mengambil data dari tabel iris_dataset di MySQL. Setelah kedua dataset berhasil diambil, data digabungkan berdasarkan kolom “id” dan “class” menggunakan metode inner join, sehingga hanya data yang memiliki pasangan di kedua database yang dipertahankan. Selanjutnya, semua data hasil penggabungan ditampilkan dalam bentuk tabel tanpa indeks agar dapat dianalisis lebih lanjut.</p>
+<p>Proses deteksi outlier dilakukan dengan menerapkan metode LOF pada empat fitur numerik, yaitu petal_length, petal_width, sepal_length, dan sepal_width. Model LOF dikonfigurasi dengan parameter n_neighbors=20, yang berarti setiap titik data akan dibandingkan dengan 20 tetangga terdekatnya, serta contamination=0.1, yang mengasumsikan bahwa 10% data merupakan outlier. Hasil deteksi ini ditambahkan ke dalam dataset dengan label -1 untuk outlier dan 1 untuk data yang dianggap normal. Setelah proses ini selesai, kode akan mencetak tabel yang berisi ID, kelas (class), dan status outlier (outlier). Terakhir, jumlah total outlier yang terdeteksi juga ditampilkan</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
+<span class="kn">from</span> <span class="nn">matplotlib.legend_handler</span> <span class="kn">import</span> <span class="n">HandlerPathCollection</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="k">def</span> <span class="nf">get_pg_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;pg-24ccfcfa-iqbal.i.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_7h7RaEuETy6xtaTdGPL&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;defaultdb&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_data&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_mysql_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;mysql-207e66db-iqbal.h.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_moPYLh4RrOq11aEBY_x&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_dataset&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Ambil data dari kedua database</span>
+<span class="n">df_postgresql</span> <span class="o">=</span> <span class="n">get_pg_data</span><span class="p">()</span>
+<span class="n">df_mysql</span> <span class="o">=</span> <span class="n">get_mysql_data</span><span class="p">()</span>
+
+<span class="c1"># Gabungkan berdasarkan kolom &#39;id&#39; dan &#39;class&#39;</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_mysql</span><span class="p">,</span> <span class="n">df_postgresql</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ambil data fitur numerik</span>
+<span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_width&quot;</span><span class="p">]</span>
+<span class="n">data_values</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Menerapkan LOF untuk deteksi outlier</span>
+<span class="n">lof</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">outlier_labels</span> <span class="o">=</span> <span class="n">lof</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data_values</span><span class="p">)</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outlier_labels</span>
+
+<span class="c1"># Menghapus data yang terdeteksi sebagai outlier</span>
+<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">])</span>
+
+<span class="c1"># Menampilkan jumlah data sebelum dan setelah pembersihan</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah data sebelum pembersihan: </span><span class="si">{</span><span class="n">df_merged</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah data setelah pembersihan: </span><span class="si">{</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan data yang telah dibersihkan</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Pilih dua fitur untuk scatter plot</span>
+<span class="n">x_feature</span> <span class="o">=</span> <span class="s2">&quot;petal_length&quot;</span>
+<span class="n">y_feature</span> <span class="o">=</span> <span class="s2">&quot;petal_width&quot;</span>
+
+<span class="c1"># Warna berdasarkan kelas</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Iris-setosa&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;Iris-versicolor&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;Iris-virginica&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">}</span>
+<span class="n">df_cleaned</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_cleaned</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="c1"># Plot scatter dengan ukuran (s) dan warna (c)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_cleaned</span><span class="p">[</span><span class="n">x_feature</span><span class="p">],</span> <span class="n">df_cleaned</span><span class="p">[</span><span class="n">y_feature</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">df_cleaned</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_feature</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_feature</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot dengan Warna Berdasarkan Class&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah data sebelum pembersihan: 150
+Jumlah data setelah pembersihan: 135
+ id           class  petal_length  petal_width  sepal_length  sepal_width
+  6     Iris-setosa           1.7          0.4           5.4          3.9
+  7     Iris-setosa           1.4          0.3           4.0          3.4
+  8     Iris-setosa           1.5          0.2           5.0          3.4
+  9     Iris-setosa           1.4          0.2           4.4          2.9
+ 10     Iris-setosa           1.5          0.4           4.9          3.1
+ 11     Iris-setosa           1.5          0.3           5.4          3.7
+ 12     Iris-setosa           1.6          0.2           4.8          3.4
+ 13     Iris-setosa           1.3          0.4           4.8          3.0
+ 14     Iris-setosa           1.0          0.2           4.3          3.0
+ 15     Iris-setosa           1.2          0.2           5.8          4.0
+ 16     Iris-setosa           1.5          0.4           5.7          4.0
+ 17     Iris-setosa           1.3          0.4           4.0          3.9
+ 18     Iris-setosa           1.4          0.3           5.1          3.5
+ 19     Iris-setosa           1.7          0.3           5.7          3.8
+ 20     Iris-setosa           1.5          0.3           5.1          3.8
+ 21     Iris-setosa           1.7          0.2           5.4          3.4
+ 22     Iris-setosa           1.5          0.4           5.1          3.7
+ 23     Iris-setosa           1.0          0.2           4.6          3.6
+ 24     Iris-setosa           1.7          0.5           5.1          3.3
+ 25     Iris-setosa           1.9          0.2           4.8          3.4
+ 26     Iris-setosa           1.6          0.2           5.0          3.0
+ 27     Iris-setosa           1.6          0.4           5.0          3.4
+ 28     Iris-setosa           1.5          0.2           5.2          3.5
+ 29     Iris-setosa           1.4          0.2           5.2          3.4
+ 30     Iris-setosa           1.6          0.2           4.7          3.2
+ 31     Iris-setosa           1.6          0.2           4.8          3.1
+ 32     Iris-setosa           1.5          0.4           5.4          3.4
+ 33     Iris-setosa           1.5          0.1           5.2          4.1
+ 34     Iris-setosa           1.4          0.2           5.5          4.2
+ 35     Iris-setosa           1.5          0.1           4.9          3.1
+ 36     Iris-setosa           1.2          0.2           5.0          3.2
+ 37     Iris-setosa           1.3          0.2           5.5          3.5
+ 38     Iris-setosa           1.5          0.1           4.9          3.1
+ 39     Iris-setosa           1.3          0.2           4.4          3.0
+ 40     Iris-setosa           1.5          0.2           5.1          3.4
+ 41     Iris-setosa           1.3          0.3           5.0          3.5
+ 42     Iris-setosa           1.3          0.3           4.5          2.3
+ 43     Iris-setosa           1.3          0.2           4.4          3.2
+ 44     Iris-setosa           1.6          0.6           5.0          3.5
+ 45     Iris-setosa           1.9          0.4           5.1          3.8
+ 46     Iris-setosa           1.4          0.3           4.8          3.0
+ 47     Iris-setosa           1.6          0.2           5.1          3.8
+ 48     Iris-setosa           1.4          0.2           4.6          3.2
+ 49     Iris-setosa           1.5          0.2           5.3          3.7
+ 50     Iris-setosa           1.4          0.2           5.0          3.3
+ 51 Iris-versicolor           4.7          1.4           7.0          3.2
+ 52 Iris-versicolor           4.5          1.5           6.4          3.2
+ 53 Iris-versicolor           4.9          1.5           6.9          3.1
+ 54 Iris-versicolor           4.0          1.3           5.5          2.3
+ 55 Iris-versicolor           4.6          1.5           6.5          2.8
+ 56 Iris-versicolor           4.5          1.3           5.7          2.8
+ 57 Iris-versicolor           4.7          1.6           6.3          3.3
+ 58 Iris-versicolor           3.3          1.0           4.9          2.4
+ 59 Iris-versicolor           4.6          1.3           6.6          2.9
+ 60 Iris-versicolor           3.9          1.4           5.2          2.7
+ 61 Iris-versicolor           3.5          1.0           5.0          2.0
+ 62 Iris-versicolor           4.2          1.5           5.9          3.0
+ 63 Iris-versicolor           4.0          1.0           6.0          2.2
+ 64 Iris-versicolor           4.7          1.4           6.1          2.9
+ 65 Iris-versicolor           3.6          1.3           5.6          2.9
+ 66 Iris-versicolor           4.4          1.4           6.7          3.1
+ 67 Iris-versicolor           4.5          1.5           5.6          3.0
+ 68 Iris-versicolor           4.1          1.0           5.8          2.7
+ 69 Iris-versicolor           4.5          1.5           6.2          2.2
+ 70 Iris-versicolor           3.9          1.1           5.6          2.5
+ 71 Iris-versicolor           4.8          1.8           5.9          3.2
+ 72 Iris-versicolor           4.0          1.3           6.1          2.8
+ 73 Iris-versicolor           4.9          1.5           6.3          2.5
+ 74 Iris-versicolor           4.7          1.2           6.1          2.8
+ 75 Iris-versicolor           4.3          1.3           6.4          2.9
+ 76 Iris-versicolor           4.4          1.4           6.6          3.0
+ 77 Iris-versicolor           4.8          1.4           6.8          2.8
+ 78 Iris-versicolor           5.0          1.7           6.7          3.0
+ 79 Iris-versicolor           4.5          1.5           6.0          2.9
+ 80 Iris-versicolor           3.5          1.0           5.7          2.6
+ 81 Iris-versicolor           3.8          1.1           5.5          2.4
+ 82 Iris-versicolor           3.7          1.0           5.5          2.4
+ 83 Iris-versicolor           3.9          1.2           5.8          2.7
+ 84 Iris-versicolor           5.1          1.6           6.0          2.7
+ 85 Iris-versicolor           4.5          1.5           5.4          3.0
+ 86 Iris-versicolor           4.5          1.6           6.0          3.4
+ 87 Iris-versicolor           4.7          1.5           6.7          3.1
+ 88 Iris-versicolor           4.4          1.3           6.3          2.3
+ 89 Iris-versicolor           4.1          1.3           5.6          3.0
+ 90 Iris-versicolor           4.0          1.3           5.5          2.5
+ 91 Iris-versicolor           4.4          1.2           5.5          2.6
+ 92 Iris-versicolor           4.6          1.4           6.1          3.0
+ 93 Iris-versicolor           4.0          1.2           5.8          2.6
+ 94 Iris-versicolor           3.3          1.0           5.0          2.3
+ 95 Iris-versicolor           4.2          1.3           5.6          2.7
+101  Iris-virginica           6.0          2.5           6.3          3.3
+102  Iris-virginica           5.1          1.9           5.8          2.7
+103  Iris-virginica           5.9          2.1           7.1          3.0
+104  Iris-virginica           5.6          1.8           6.3          2.9
+105  Iris-virginica           5.8          2.2           6.5          3.0
+106  Iris-virginica           6.6          2.1           7.6          3.0
+107  Iris-virginica           4.5          1.7           4.9          2.5
+108  Iris-virginica           6.3          1.8           7.3          2.9
+109  Iris-virginica           5.8          1.8           6.7          2.5
+110  Iris-virginica           6.1          2.5           7.2          3.6
+111  Iris-virginica           5.1          2.0           6.5          3.2
+112  Iris-virginica           5.3          1.9           6.4          2.7
+113  Iris-virginica           5.5          2.1           6.8          3.0
+114  Iris-virginica           5.0          2.0           5.7          2.5
+115  Iris-virginica           5.1          2.4           5.8          2.8
+116  Iris-virginica           5.3          2.3           6.4          3.2
+117  Iris-virginica           5.5          1.8           6.5          3.0
+120  Iris-virginica           5.0          1.5           6.0          2.2
+121  Iris-virginica           5.7          2.3           6.9          3.2
+122  Iris-virginica           4.9          2.0           5.6          2.8
+124  Iris-virginica           4.9          1.8           6.3          2.7
+125  Iris-virginica           5.7          2.1           6.7          3.3
+126  Iris-virginica           6.0          1.8           7.2          3.2
+127  Iris-virginica           4.8          1.8           6.2          2.8
+128  Iris-virginica           4.9          1.8           6.1          3.0
+129  Iris-virginica           5.6          2.1           6.4          2.8
+130  Iris-virginica           5.8          1.6           7.2          3.0
+131  Iris-virginica           6.1          1.9           7.4          2.8
+133  Iris-virginica           5.6          2.2           6.4          2.8
+134  Iris-virginica           5.1          1.5           6.3          2.8
+135  Iris-virginica           5.6          1.4           6.1          2.6
+136  Iris-virginica           6.1          2.3           7.7          3.0
+137  Iris-virginica           5.6          2.4           6.3          3.4
+138  Iris-virginica           5.5          1.8           6.4          3.1
+139  Iris-virginica           4.8          1.8           6.0          3.0
+140  Iris-virginica           5.4          2.1           6.9          3.1
+141  Iris-virginica           5.6          2.4           6.7          3.1
+142  Iris-virginica           5.1          2.3           6.9          3.1
+143  Iris-virginica           5.1          1.9           5.8          2.7
+144  Iris-virginica           5.9          2.3           6.8          3.2
+145  Iris-virginica           5.7          2.5           6.7          3.3
+146  Iris-virginica           5.2          2.3           6.7          3.0
+147  Iris-virginica           5.0          1.9           6.3          2.5
+148  Iris-virginica           5.2          2.0           6.5          3.0
+149  Iris-virginica           5.4          2.3           6.2          3.4
+</pre></div>
+</div>
+<img alt="_images/fa443dbd099f4dc173705e321549d72d9f7449700ae0f0775203685e1e516e8e.png" src="_images/fa443dbd099f4dc173705e321549d72d9f7449700ae0f0775203685e1e516e8e.png" />
+</div>
+</div>
+<p>Kode di atas bertujuan untuk mengambil, menggabungkan, membersihkan, dan memvisualisasikan data bunga iris dari dua sumber basis data yang berbeda, yaitu PostgreSQL dan MySQL. Data pertama diambil menggunakan fungsi get_pg_data(), yang mengakses tabel iris_data dari PostgreSQL, serta get_mysql_data(), yang mengambil data dari tabel iris_dataset di MySQL. Setelah kedua dataset berhasil diambil, data digabungkan berdasarkan kolom “id” dan “class” menggunakan metode inner join, sehingga hanya data yang memiliki pasangan di kedua database yang dipertahankan.</p>
+<p>Setelah penggabungan, dilakukan deteksi outlier menggunakan metode Local Outlier Factor (LOF) dengan parameter n_neighbors=20 dan contamination=0.1, yang berarti 10% data dianggap sebagai outlier. Data yang terdeteksi sebagai outlier ditandai dalam kolom tambahan bernama “outlier”. Selanjutnya, data yang terdeteksi sebagai outlier dihapus, dan jumlah data sebelum serta sesudah pembersihan ditampilkan untuk melihat dampak dari proses tersebut.</p>
+<p>Sebagai langkah akhir, kode menghasilkan visualisasi scatter plot menggunakan Matplotlib untuk melihat distribusi data setelah pembersihan. Dua fitur utama yang digunakan dalam scatter plot adalah “petal_length” dan “petal_width”, dengan warna titik yang berbeda berdasarkan kelas bunga (Iris-setosa, Iris-versicolor, dan Iris-virginica). Warna biru digunakan untuk Iris-setosa, hijau untuk Iris-versicolor, dan merah untuk Iris-virginica. Titik-titik data diberikan tepi hitam (edgecolors=”k”) agar lebih mudah dibedakan dalam grafik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bagi data menjadi Training (80%) dan Testing (20%)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">df_cleaned</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span> <span class="n">df_cleaned</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jumlah data setelah pembersihan: </span><span class="si">{</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training set: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing set: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> sampel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah data setelah pembersihan: 135
+Training set: 108 sampel
+Testing set: 27 sampel
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kode di atas bertujuan untuk membagi dataset yang telah dibersihkan menjadi dua bagian: Training set (80%) dan Testing set (20%). Proses ini menggunakan fungsi train_test_split() dari Scikit-Learn dengan parameter random_state=42 agar pembagian data tetap konsisten setiap kali dijalankan.</p>
+<p>Dataset yang digunakan adalah df_cleaned, yaitu data hasil pembersihan outlier. Variabel X_train dan X_test berisi fitur (feature_columns), sedangkan y_train dan y_test berisi label kelas (“class”) untuk setiap sampel. Setelah pembagian, jumlah total data setelah pembersihan ditampilkan, diikuti dengan jumlah sampel yang masuk ke dalam Training set dan Testing set. Hal ini penting untuk memastikan bahwa data yang digunakan dalam pelatihan dan pengujian model sudah terdistribusi dengan baik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data dari 150</span>
+
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
+
+<span class="c1"># Fungsi untuk mengambil data dari PostgreSQL</span>
+<span class="k">def</span> <span class="nf">get_pg_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;pg-24ccfcfa-iqbal.i.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_7h7RaEuETy6xtaTdGPL&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;defaultdb&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_data&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Fungsi untuk mengambil data dari MySQL</span>
+<span class="k">def</span> <span class="nf">get_mysql_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;mysql-207e66db-iqbal.h.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_moPYLh4RrOq11aEBY_x&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_dataset&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Ambil data dari kedua database</span>
+<span class="n">df_postgresql</span> <span class="o">=</span> <span class="n">get_pg_data</span><span class="p">()</span>
+<span class="n">df_mysql</span> <span class="o">=</span> <span class="n">get_mysql_data</span><span class="p">()</span>
+
+<span class="c1"># Gabungkan berdasarkan kolom &#39;id&#39; dan &#39;class&#39;</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_mysql</span><span class="p">,</span> <span class="n">df_postgresql</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ambil dua fitur utama untuk visualisasi decision boundary</span>
+<span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
+
+<span class="c1"># Encode label kelas ke numerik</span>
+<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_encoded</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Membagi data menjadi training (80%) dan testing (20%)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y_encoded</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Pipeline dengan KNN dan StandardScaler</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;knn&quot;</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">11</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="c1"># Pelatihan model KNN</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Evaluasi model</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
+
+<span class="c1"># Visualisasi Decision Boundary</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">weights</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">)):</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">knn__weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+        <span class="n">clf</span><span class="p">,</span>
+        <span class="n">X_test</span><span class="p">,</span>
+        <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span>
+        <span class="n">plot_method</span><span class="o">=</span><span class="s2">&quot;pcolormesh&quot;</span><span class="p">,</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">disp</span><span class="o">.</span><span class="n">ax_</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span>
+    <span class="p">)</span>
+    <span class="n">disp</span><span class="o">.</span><span class="n">ax_</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+        <span class="n">scatter</span><span class="o">.</span><span class="n">legend_elements</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+        <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Classes&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">disp</span><span class="o">.</span><span class="n">ax_</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;3-Class classification</span><span class="se">\n</span><span class="s2">(k=</span><span class="si">{</span><span class="n">clf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">n_neighbors</span><span class="si">}</span><span class="s2">, weights=</span><span class="si">{</span><span class="n">weights</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9333333333333333
+                 precision    recall  f1-score   support
+
+    Iris-setosa       0.83      1.00      0.91        10
+Iris-versicolor       1.00      1.00      1.00         9
+ Iris-virginica       1.00      0.82      0.90        11
+
+       accuracy                           0.93        30
+      macro avg       0.94      0.94      0.94        30
+   weighted avg       0.94      0.93      0.93        30
+</pre></div>
+</div>
+<img alt="_images/b9ec6d988b8eafa58c6b2e807c1c22e4e1f2cc78f289ecda8f66149b0f8cf542.png" src="_images/b9ec6d988b8eafa58c6b2e807c1c22e4e1f2cc78f289ecda8f66149b0f8cf542.png" />
+</div>
+</div>
+<p>Kode di atas mengimplementasikan K-Nearest Neighbors (KNN) untuk klasifikasi dataset Iris yang diambil dari dua database (PostgreSQL dan MySQL).</p>
+<ol class="arabic simple">
+<li><p>Mengambil Data</p></li>
+</ol>
+<ul class="simple">
+<li><p>Data diambil dari tabel iris_data di PostgreSQL dan iris_dataset di MySQL.</p></li>
+<li><p>Data dari kedua database digabungkan berdasarkan kolom ‘id’ dan ‘class’.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Pra-pemrosesan Data</p></li>
+</ol>
+<ul class="simple">
+<li><p>Hanya dua fitur utama yang dipilih untuk analisis dan visualisasi: petal_length dan petal_width.</p></li>
+<li><p>Label kelas dikonversi menjadi nilai numerik menggunakan LabelEncoder.</p></li>
+<li><p>Data dibagi menjadi 80% training dan 20% testing menggunakan train_test_split().</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Pelatihan Model KNN</p></li>
+</ol>
+<ul class="simple">
+<li><p>Model KNN dengan k=11 diterapkan dalam Pipeline yang mencakup StandardScaler (normalisasi data).</p></li>
+<li><p>Model dilatih menggunakan X_train dan y_train.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Evaluasi Model</p></li>
+</ol>
+<ul class="simple">
+<li><p>Akurasi model dihitung menggunakan accuracy_score().</p></li>
+<li><p>Laporan klasifikasi (classification_report) menampilkan metrik seperti precision, recall, dan
+F1-score untuk setiap kelas.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Visualisasi Decision Boundary</p></li>
+</ol>
+<ul class="simple">
+<li><p>Decision boundary divisualisasikan untuk membandingkan dua jenis bobot KNN:</p>
+<ul>
+<li><p>uniform → Semua tetangga memiliki bobot yang sama.</p></li>
+<li><p>distance → Tetangga yang lebih dekat memiliki bobot lebih besar.</p></li>
+</ul>
+</li>
+<li><p>Hasilnya divisualisasikan dengan pcolormesh, serta menampilkan titik data training dengan warna sesuai kelasnya.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
+
+<span class="c1"># Fungsi untuk mengambil data dari PostgreSQL</span>
+<span class="k">def</span> <span class="nf">get_pg_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;pg-24ccfcfa-iqbal.i.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_7h7RaEuETy6xtaTdGPL&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;defaultdb&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_data&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Fungsi untuk mengambil data dari MySQL</span>
+<span class="k">def</span> <span class="nf">get_mysql_data</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;mysql-207e66db-iqbal.h.aivencloud.com&quot;</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_moPYLh4RrOq11aEBY_x&quot;</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">11038</span>
+    <span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM iris_dataset&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Ambil data dari kedua database</span>
+<span class="n">df_postgresql</span> <span class="o">=</span> <span class="n">get_pg_data</span><span class="p">()</span>
+<span class="n">df_mysql</span> <span class="o">=</span> <span class="n">get_mysql_data</span><span class="p">()</span>
+
+<span class="c1"># Gabungkan berdasarkan kolom &#39;id&#39; dan &#39;class&#39;</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_mysql</span><span class="p">,</span> <span class="n">df_postgresql</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ambil dua fitur utama untuk visualisasi decision boundary</span>
+<span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
+
+<span class="c1"># Encode label kelas ke numerik</span>
+<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_encoded</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># Mengubah nama kelas menjadi angka</span>
+
+<span class="c1"># Menerapkan LOF untuk deteksi outlier</span>
+<span class="n">lof</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">outlier_labels</span> <span class="o">=</span> <span class="n">lof</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outlier_labels</span>
+
+<span class="c1"># Menghapus data yang terdeteksi sebagai outlier</span>
+<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">df_merged</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">])</span>
+
+<span class="c1"># Membagi data menjadi training (80%) dan testing (20%)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">df_cleaned</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">],</span>
+    <span class="n">label_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_cleaned</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]),</span>  <span class="c1"># Pastikan target dalam bentuk numerik</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Pipeline dengan KNN dan StandardScaler</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;knn&quot;</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">11</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="c1"># Pelatihan model KNN</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Evaluasi model</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
+
+<span class="c1"># Visualisasi Decision Boundary</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">weights</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">)):</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">knn__weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+        <span class="n">clf</span><span class="p">,</span>
+        <span class="n">X_test</span><span class="p">,</span>
+        <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span>
+        <span class="n">plot_method</span><span class="o">=</span><span class="s2">&quot;pcolormesh&quot;</span><span class="p">,</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">shading</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">scatter</span> <span class="o">=</span> <span class="n">disp</span><span class="o">.</span><span class="n">ax_</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span>
+    <span class="p">)</span>
+    <span class="n">disp</span><span class="o">.</span><span class="n">ax_</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+        <span class="n">scatter</span><span class="o">.</span><span class="n">legend_elements</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+        <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Classes&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">disp</span><span class="o">.</span><span class="n">ax_</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;3-Class classification</span><span class="se">\n</span><span class="s2">(k=</span><span class="si">{</span><span class="n">clf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">n_neighbors</span><span class="si">}</span><span class="s2">, weights=</span><span class="si">{</span><span class="n">weights</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9629629629629629
+                 precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        12
+Iris-versicolor       0.88      1.00      0.93         7
+ Iris-virginica       1.00      0.88      0.93         8
+
+       accuracy                           0.96        27
+      macro avg       0.96      0.96      0.96        27
+   weighted avg       0.97      0.96      0.96        27
+</pre></div>
+</div>
+<img alt="_images/97a7ee6fd1e1ae47fb81c1c076ec0a5ef511c7d1426f3ce74eb1b17e14b0bcbb.png" src="_images/97a7ee6fd1e1ae47fb81c1c076ec0a5ef511c7d1426f3ce74eb1b17e14b0bcbb.png" />
+</div>
+</div>
+<p>Kode di atas merupakan analisis data Iris yang diambil dari PostgreSQL dan MySQL, dengan langkah-langkah berikut:</p>
+<ol class="arabic simple">
+<li><p>Mengambil Data dari Database</p></li>
+</ol>
+<ul class="simple">
+<li><p>get_pg_data() mengambil data dari PostgreSQL.</p></li>
+<li><p>get_mysql_data() mengambil data dari MySQL.</p></li>
+<li><p>Kedua data digabungkan berdasarkan kolom id dan class.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Pra-pemrosesan Data</p></li>
+</ol>
+<ul class="simple">
+<li><p>Memilih fitur utama: petal_length dan petal_width.</p></li>
+<li><p>LabelEncoder mengonversi nama kelas (Iris-setosa, Iris-versicolor, Iris-virginica) menjadi angka.</p></li>
+<li><p>Local Outlier Factor (LOF) digunakan untuk mendeteksi dan menghapus outlier dari dataset.</p></li>
+<li><p>Dataset dibagi menjadi 80% training dan 20% testing menggunakan train_test_split().</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Melatih Model KNN</p></li>
+</ol>
+<ul class="simple">
+<li><p>Model menggunakan K-Nearest Neighbors (KNN) dengan k=11 dalam pipeline yang mencakup StandardScaler untuk normalisasi data.</p></li>
+<li><p>Model dilatih dengan X_train dan y_train.</p></li>
+<li><p>Evaluasi model dilakukan dengan akurasi dan classification report.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Visualisasi Decision Boundary</p></li>
+</ol>
+<ul class="simple">
+<li><p>Decision boundary divisualisasikan menggunakan DecisionBoundaryDisplay.</p></li>
+<li><p>Dibandingkan dua metode penentuan bobot:</p>
+<ul>
+<li><p>uniform → Semua tetangga berbobot sama.</p></li>
+<li><p>distance → Tetangga yang lebih dekat memiliki bobot lebih besar.</p></li>
+</ul>
+</li>
+<li><p>Hasilnya divisualisasikan menggunakan pcolormesh dengan titik data dari training set ditampilkan sesuai kelasnya.</p></li>
+</ul>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="LOF.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Deteksi Outlier dengan Metode Local Outlier Factor (LOF) dalam Data Understanding</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mochammad Iqbal Dwi Cahyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
