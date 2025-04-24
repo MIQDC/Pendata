@@ -60,9 +60,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tugas2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding" href="KNN.html" />
     <link rel="prev" title="TUGAS 1" href="pendat.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -169,7 +172,12 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pendat.html">TUGAS 1</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 2</strong></a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><strong>Tugas 2</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="KNN.html">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LOF.html">Deteksi Outlier dengan Metode Local Outlier Factor (LOF) dalam Data Understanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tugas_3.html">IMPLEMENTASI NAIVE BAYES</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -571,6 +579,8 @@
 <p>Kode tersebut melakukan pengurutan data dalam sebuah <strong>DataFrame</strong> bernama <code class="docutils literal notranslate"><span class="pre">df_merged</span></code> berdasarkan nilai dalam kolom <code class="docutils literal notranslate"><span class="pre">&quot;distance&quot;</span></code>. Proses ini dilakukan menggunakan fungsi <code class="docutils literal notranslate"><span class="pre">.sort_values()</span></code>, dengan parameter <code class="docutils literal notranslate"><span class="pre">by=&quot;distance&quot;</span></code> yang menunjukkan bahwa pengurutan dilakukan berdasarkan kolom <code class="docutils literal notranslate"><span class="pre">&quot;distance&quot;</span></code>, serta <code class="docutils literal notranslate"><span class="pre">ascending=True</span></code> yang menandakan bahwa pengurutan dilakukan dari nilai terkecil ke terbesar. Hasil dari proses pengurutan ini kemudian disimpan dalam variabel baru bernama <code class="docutils literal notranslate"><span class="pre">df_sorted</span></code>. Setelah pengurutan selesai, hasilnya ditampilkan ke layar dalam bentuk teks menggunakan <code class="docutils literal notranslate"><span class="pre">print(df_sorted.to_string(index=False))</span></code>, yang memastikan bahwa seluruh isi <strong>DataFrame</strong> dicetak tanpa menyertakan indeks.</p>
 </section>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -611,6 +621,15 @@
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">TUGAS 1</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="KNN.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
