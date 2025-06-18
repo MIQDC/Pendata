@@ -1,0 +1,1829 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Teknik Binning &#8212; Penambangan Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Binnings';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Decision Tree" href="Decision_Tree.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo3.jpg" class="logo__image only-light" alt="Penambangan Data - Home"/>
+    <img src="_static/logo3.jpg" class="logo__image only-dark pst-js-only" alt="Penambangan Data - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Penambangan Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pendat.html">TUGAS 1</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tugas2.html"><strong>Tugas 2</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="KNN.html">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LOF.html">Deteksi Outlier dengan Metode Local Outlier Factor (LOF) dalam Data Understanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tugas_3.html">IMPLEMENTASI NAIVE BAYES</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="Proyek_UTS_Penambangan_Data_%28B%29.html">Proyek UTS Penambangan Data (B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pendatoi2.html"><strong>Algoritma <em>K-Means</em></strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugaas_Fuzzy_c_mean_clustering.html">Tugas c-mean clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree.html">Decision Tree</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Teknik Binning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FBinnings.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Binnings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Teknik Binning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#library-yang-digunakan">Library yang digunakan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ambil-data-iris-asli">Ambil data iris asli</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-asli">Klasifikasi Naive Bayes pada Data Iris asli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-asli">Klasifikasi Decision Tree pada Data Iris asli</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris">Diskritisasi Dataset Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris-menggunakan-k-means">Diskritisasi Dataset Iris menggunakan K-Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-k-means">Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan K-Means</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-k-means">Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan K-Means</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris-menggunakan-equal-width-binning">Diskritisasi Dataset Iris menggunakan Equal-Width Binning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width">Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan Equal-Width</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width-binning">Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan Equal-Width Binning</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris-menggunakan-equal-frequency-binning">Diskritisasi Dataset Iris menggunakan Equal-Frequency Binning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency">Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan Equal-Frequency</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency">Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan Equal-Frequency</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi">Perbandingan Akurasi</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="teknik-binning">
+<h1>Teknik Binning<a class="headerlink" href="#teknik-binning" title="Link to this heading">#</a></h1>
+<p>Data binning atau bucketing merupakan teknik pra-pemrosesan data yang bertujuan untuk meminimalkan pengaruh kesalahan pengamatan. Dalam metode ini, nilai-nilai asli data dikelompokkan ke dalam interval-interval kecil yang disebut bin. Setiap bin kemudian diwakili oleh suatu nilai umum yang dihitung dari nilai-nilai di dalamnya. Proses ini memberikan efek penghalusan (smoothing) terhadap data dan membantu mengurangi kemungkinan overfitting, khususnya pada dataset berukuran kecil.</p>
+<section id="library-yang-digunakan">
+<h2>Library yang digunakan<a class="headerlink" href="#library-yang-digunakan" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">CategoricalNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ambil-data-iris-asli">
+<h2>Ambil data iris asli<a class="headerlink" href="#ambil-data-iris-asli" title="Link to this heading">#</a></h2>
+<p>Disini saya Load dataset iris yang berasal dari library sklearn dan menampilkan semua fiturnya</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset iris</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)
+               5.1               3.5                1.4               0.2
+               4.9               3.0                1.4               0.2
+               4.7               3.2                1.3               0.2
+               4.6               3.1                1.5               0.2
+               5.0               3.6                1.4               0.2
+               5.4               3.9                1.7               0.4
+               4.6               3.4                1.4               0.3
+               5.0               3.4                1.5               0.2
+               4.4               2.9                1.4               0.2
+               4.9               3.1                1.5               0.1
+               5.4               3.7                1.5               0.2
+               4.8               3.4                1.6               0.2
+               4.8               3.0                1.4               0.1
+               4.3               3.0                1.1               0.1
+               5.8               4.0                1.2               0.2
+               5.7               4.4                1.5               0.4
+               5.4               3.9                1.3               0.4
+               5.1               3.5                1.4               0.3
+               5.7               3.8                1.7               0.3
+               5.1               3.8                1.5               0.3
+               5.4               3.4                1.7               0.2
+               5.1               3.7                1.5               0.4
+               4.6               3.6                1.0               0.2
+               5.1               3.3                1.7               0.5
+               4.8               3.4                1.9               0.2
+               5.0               3.0                1.6               0.2
+               5.0               3.4                1.6               0.4
+               5.2               3.5                1.5               0.2
+               5.2               3.4                1.4               0.2
+               4.7               3.2                1.6               0.2
+               4.8               3.1                1.6               0.2
+               5.4               3.4                1.5               0.4
+               5.2               4.1                1.5               0.1
+               5.5               4.2                1.4               0.2
+               4.9               3.1                1.5               0.2
+               5.0               3.2                1.2               0.2
+               5.5               3.5                1.3               0.2
+               4.9               3.6                1.4               0.1
+               4.4               3.0                1.3               0.2
+               5.1               3.4                1.5               0.2
+               5.0               3.5                1.3               0.3
+               4.5               2.3                1.3               0.3
+               4.4               3.2                1.3               0.2
+               5.0               3.5                1.6               0.6
+               5.1               3.8                1.9               0.4
+               4.8               3.0                1.4               0.3
+               5.1               3.8                1.6               0.2
+               4.6               3.2                1.4               0.2
+               5.3               3.7                1.5               0.2
+               5.0               3.3                1.4               0.2
+               7.0               3.2                4.7               1.4
+               6.4               3.2                4.5               1.5
+               6.9               3.1                4.9               1.5
+               5.5               2.3                4.0               1.3
+               6.5               2.8                4.6               1.5
+               5.7               2.8                4.5               1.3
+               6.3               3.3                4.7               1.6
+               4.9               2.4                3.3               1.0
+               6.6               2.9                4.6               1.3
+               5.2               2.7                3.9               1.4
+               5.0               2.0                3.5               1.0
+               5.9               3.0                4.2               1.5
+               6.0               2.2                4.0               1.0
+               6.1               2.9                4.7               1.4
+               5.6               2.9                3.6               1.3
+               6.7               3.1                4.4               1.4
+               5.6               3.0                4.5               1.5
+               5.8               2.7                4.1               1.0
+               6.2               2.2                4.5               1.5
+               5.6               2.5                3.9               1.1
+               5.9               3.2                4.8               1.8
+               6.1               2.8                4.0               1.3
+               6.3               2.5                4.9               1.5
+               6.1               2.8                4.7               1.2
+               6.4               2.9                4.3               1.3
+               6.6               3.0                4.4               1.4
+               6.8               2.8                4.8               1.4
+               6.7               3.0                5.0               1.7
+               6.0               2.9                4.5               1.5
+               5.7               2.6                3.5               1.0
+               5.5               2.4                3.8               1.1
+               5.5               2.4                3.7               1.0
+               5.8               2.7                3.9               1.2
+               6.0               2.7                5.1               1.6
+               5.4               3.0                4.5               1.5
+               6.0               3.4                4.5               1.6
+               6.7               3.1                4.7               1.5
+               6.3               2.3                4.4               1.3
+               5.6               3.0                4.1               1.3
+               5.5               2.5                4.0               1.3
+               5.5               2.6                4.4               1.2
+               6.1               3.0                4.6               1.4
+               5.8               2.6                4.0               1.2
+               5.0               2.3                3.3               1.0
+               5.6               2.7                4.2               1.3
+               5.7               3.0                4.2               1.2
+               5.7               2.9                4.2               1.3
+               6.2               2.9                4.3               1.3
+               5.1               2.5                3.0               1.1
+               5.7               2.8                4.1               1.3
+               6.3               3.3                6.0               2.5
+               5.8               2.7                5.1               1.9
+               7.1               3.0                5.9               2.1
+               6.3               2.9                5.6               1.8
+               6.5               3.0                5.8               2.2
+               7.6               3.0                6.6               2.1
+               4.9               2.5                4.5               1.7
+               7.3               2.9                6.3               1.8
+               6.7               2.5                5.8               1.8
+               7.2               3.6                6.1               2.5
+               6.5               3.2                5.1               2.0
+               6.4               2.7                5.3               1.9
+               6.8               3.0                5.5               2.1
+               5.7               2.5                5.0               2.0
+               5.8               2.8                5.1               2.4
+               6.4               3.2                5.3               2.3
+               6.5               3.0                5.5               1.8
+               7.7               3.8                6.7               2.2
+               7.7               2.6                6.9               2.3
+               6.0               2.2                5.0               1.5
+               6.9               3.2                5.7               2.3
+               5.6               2.8                4.9               2.0
+               7.7               2.8                6.7               2.0
+               6.3               2.7                4.9               1.8
+               6.7               3.3                5.7               2.1
+               7.2               3.2                6.0               1.8
+               6.2               2.8                4.8               1.8
+               6.1               3.0                4.9               1.8
+               6.4               2.8                5.6               2.1
+               7.2               3.0                5.8               1.6
+               7.4               2.8                6.1               1.9
+               7.9               3.8                6.4               2.0
+               6.4               2.8                5.6               2.2
+               6.3               2.8                5.1               1.5
+               6.1               2.6                5.6               1.4
+               7.7               3.0                6.1               2.3
+               6.3               3.4                5.6               2.4
+               6.4               3.1                5.5               1.8
+               6.0               3.0                4.8               1.8
+               6.9               3.1                5.4               2.1
+               6.7               3.1                5.6               2.4
+               6.9               3.1                5.1               2.3
+               5.8               2.7                5.1               1.9
+               6.8               3.2                5.9               2.3
+               6.7               3.3                5.7               2.5
+               6.7               3.0                5.2               2.3
+               6.3               2.5                5.0               1.9
+               6.5               3.0                5.2               2.0
+               6.2               3.4                5.4               2.3
+               5.9               3.0                5.1               1.8
+</pre></div>
+</div>
+</div>
+</div>
+<section id="klasifikasi-naive-bayes-pada-data-iris-asli">
+<h3>Klasifikasi Naive Bayes pada Data Iris asli<a class="headerlink" href="#klasifikasi-naive-bayes-pada-data-iris-asli" title="Link to this heading">#</a></h3>
+<p>setelah itu saya melakukan klasifikasi Naive Bayes pada data iris asli, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset Iris</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span>
+<span class="n">target_names</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span>
+
+<span class="c1"># Split data: 80% training, 20% testing</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Naive Bayes</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Evaluasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">))</span>
+
+<span class="c1"># Confusion Matrix</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi Confusion Matrix dengan heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="n">target_names</span><span class="p">,</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="n">target_names</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Actual&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix - Naive Bayes Dataset Iris&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 1.0
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       1.00      1.00      1.00         9
+   virginica       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+</pre></div>
+</div>
+<img alt="_images/2bb5aadd797f90fdf62ed37c70b59c708b30b8f510c2d1617e119e2caf200c62.png" src="_images/2bb5aadd797f90fdf62ed37c70b59c708b30b8f510c2d1617e119e2caf200c62.png" />
+</div>
+</div>
+</section>
+<section id="klasifikasi-decision-tree-pada-data-iris-asli">
+<h3>Klasifikasi Decision Tree pada Data Iris asli<a class="headerlink" href="#klasifikasi-decision-tree-pada-data-iris-asli" title="Link to this heading">#</a></h3>
+<p>Disini saya melakukan klasifikasi Decision Tree pada data iris asli, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Buat dan latih model Decision Tree</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Evaluasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">))</span>
+
+<span class="c1"># -------------------------</span>
+<span class="c1"># Visualisasi Pohon Keputusan</span>
+<span class="c1"># -------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+          <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span><span class="p">,</span>
+          <span class="n">class_names</span><span class="o">=</span><span class="n">target_names</span><span class="p">,</span>
+          <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Decision Tree - Dataset Iris&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 1.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       1.00      1.00      1.00         9
+   virginica       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+</pre></div>
+</div>
+<img alt="_images/c00c42f7aeb09d9493797e4b2164cc59e91568b217d820c1378574e00c8f6346.png" src="_images/c00c42f7aeb09d9493797e4b2164cc59e91568b217d820c1378574e00c8f6346.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="diskritisasi-dataset-iris">
+<h2>Diskritisasi Dataset Iris<a class="headerlink" href="#diskritisasi-dataset-iris" title="Link to this heading">#</a></h2>
+<section id="diskritisasi-dataset-iris-menggunakan-k-means">
+<h3>Diskritisasi Dataset Iris menggunakan K-Means<a class="headerlink" href="#diskritisasi-dataset-iris-menggunakan-k-means" title="Link to this heading">#</a></h3>
+<p>####<strong>Diskritisasi dengan K-Means</strong> merupakan salah satu metode canggih dalam pra-pemrosesan data yang bersifat adaptif dan berbasis unsupervised learning. Teknik ini digunakan untuk mengelompokkan data numerik ke dalam beberapa kelompok (cluster) berdasarkan kemiripan nilai, terutama dengan mengukur jarak antar data. Prosesnya dimulai dengan menentukan jumlah cluster yang diinginkan, misalnya tiga. Algoritma K-Means kemudian memilih titik awal (centroid) secara acak, lalu menghitung jarak setiap data ke masing-masing centroid. Data akan dikelompokkan ke dalam cluster dengan centroid terdekat. Setelah pengelompokan selesai, posisi centroid akan diperbarui berdasarkan rata-rata nilai data dalam masing-masing cluster. Proses ini berlangsung secara iteratif hingga tercapai kondisi yang stabil.</p>
+<p>Dibandingkan dengan metode diskritisasi tradisional yang menggunakan batas rentang tetap, K-Means lebih fleksibel karena mengikuti pola distribusi alami data. Jika data tidak tersebar merata atau menunjukkan pola pengelompokan tertentu, K-Means cenderung menghasilkan pembagian yang lebih representatif. Namun demikian, metode ini memerlukan proses iterasi yang kompleks dan hasilnya dapat dipengaruhi oleh penentuan centroid awal. Selain itu, jumlah cluster harus ditentukan sebelumnya, yang terkadang membutuhkan beberapa kali percobaan untuk mendapatkan hasil optimal. Meskipun memiliki tantangan, K-Means Discretization tetap menjadi metode yang diandalkan untuk memperoleh pengelompokan data numerik yang akurat.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mapping angka cluster ke huruf</span>
+<span class="n">label_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">}</span>
+
+<span class="c1"># Fungsi clustering per kolom</span>
+<span class="k">def</span> <span class="nf">cluster_column</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="n">column</span><span class="p">]]</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">clusters</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">label_map</span><span class="p">)</span>
+
+<span class="c1"># Buat DataFrame hanya berisi hasil clustering</span>
+<span class="n">df_kmeans</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;sepal_length&#39;</span><span class="p">:</span> <span class="n">cluster_column</span><span class="p">(</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;sepal_width&#39;</span><span class="p">:</span>  <span class="n">cluster_column</span><span class="p">(</span><span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;petal_length&#39;</span><span class="p">:</span> <span class="n">cluster_column</span><span class="p">(</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;petal_width&#39;</span><span class="p">:</span>  <span class="n">cluster_column</span><span class="p">(</span><span class="s1">&#39;petal width (cm)&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Tambahkan kolom class_label di bagian depan</span>
+<span class="n">df_kmeans</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="c1"># Tampilkan hasil klaster</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_kmeans</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     class sepal_length sepal_width petal_length petal_width
+    setosa            C           D            B           B
+    setosa            C           C            B           B
+    setosa            C           A            B           B
+    setosa            C           A            B           B
+    setosa            C           D            B           B
+    setosa            B           D            B           B
+    setosa            C           A            B           B
+    setosa            C           A            B           B
+    setosa            C           C            B           B
+    setosa            C           A            B           B
+    setosa            B           D            B           B
+    setosa            C           A            B           B
+    setosa            C           C            B           B
+    setosa            C           C            B           B
+    setosa            B           D            B           B
+    setosa            B           D            B           B
+    setosa            B           D            B           B
+    setosa            C           D            B           B
+    setosa            B           D            B           B
+    setosa            C           D            B           B
+    setosa            B           A            B           B
+    setosa            C           D            B           B
+    setosa            C           D            B           B
+    setosa            C           A            B           B
+    setosa            C           A            B           B
+    setosa            C           C            B           B
+    setosa            C           A            B           B
+    setosa            C           D            B           B
+    setosa            C           A            B           B
+    setosa            C           A            B           B
+    setosa            C           A            B           B
+    setosa            B           A            B           B
+    setosa            C           D            B           B
+    setosa            B           D            B           B
+    setosa            C           A            B           B
+    setosa            C           A            B           B
+    setosa            B           D            B           B
+    setosa            C           D            B           B
+    setosa            C           C            B           B
+    setosa            C           A            B           B
+    setosa            C           D            B           B
+    setosa            C           B            B           B
+    setosa            C           A            B           B
+    setosa            C           D            B           B
+    setosa            C           D            B           B
+    setosa            C           C            B           B
+    setosa            C           D            B           B
+    setosa            C           A            B           B
+    setosa            B           D            B           B
+    setosa            C           A            B           B
+versicolor            D           A            A           C
+versicolor            A           A            A           A
+versicolor            D           A            A           A
+versicolor            B           B            C           C
+versicolor            A           C            A           A
+versicolor            B           C            A           C
+versicolor            A           A            A           A
+versicolor            C           B            C           C
+versicolor            A           C            A           C
+versicolor            C           B            C           C
+versicolor            C           B            C           C
+versicolor            B           C            C           A
+versicolor            A           B            C           C
+versicolor            A           C            A           C
+versicolor            B           C            C           C
+versicolor            A           A            A           C
+versicolor            B           C            A           A
+versicolor            B           B            C           C
+versicolor            A           B            A           A
+versicolor            B           B            C           C
+versicolor            B           A            A           A
+versicolor            A           C            C           C
+versicolor            A           B            A           A
+versicolor            A           C            A           C
+versicolor            A           C            C           C
+versicolor            A           C            A           C
+versicolor            D           C            A           C
+versicolor            A           C            A           A
+versicolor            A           C            A           A
+versicolor            B           B            C           C
+versicolor            B           B            C           C
+versicolor            B           B            C           C
+versicolor            B           B            C           C
+versicolor            A           B            A           A
+versicolor            B           C            A           A
+versicolor            A           A            A           A
+versicolor            A           A            A           A
+versicolor            A           B            A           C
+versicolor            B           C            C           C
+versicolor            B           B            C           C
+versicolor            B           B            A           C
+versicolor            A           C            A           C
+versicolor            B           B            C           C
+versicolor            C           B            C           C
+versicolor            B           B            C           C
+versicolor            B           C            C           C
+versicolor            B           C            C           C
+versicolor            A           C            C           C
+versicolor            C           B            C           C
+versicolor            B           C            C           C
+ virginica            A           A            D           D
+ virginica            B           B            A           A
+ virginica            D           C            D           D
+ virginica            A           C            D           A
+ virginica            A           C            D           D
+ virginica            D           C            D           D
+ virginica            C           B            A           A
+ virginica            D           C            D           A
+ virginica            A           B            D           A
+ virginica            D           D            D           D
+ virginica            A           A            A           A
+ virginica            A           B            A           A
+ virginica            D           C            D           D
+ virginica            B           B            A           A
+ virginica            B           C            A           D
+ virginica            A           A            A           D
+ virginica            A           C            D           A
+ virginica            D           D            D           D
+ virginica            D           B            D           D
+ virginica            A           B            A           A
+ virginica            D           A            D           D
+ virginica            B           C            A           A
+ virginica            D           C            D           A
+ virginica            A           B            A           A
+ virginica            A           A            D           D
+ virginica            D           A            D           A
+ virginica            A           C            A           A
+ virginica            A           C            A           A
+ virginica            A           C            D           D
+ virginica            D           C            D           A
+ virginica            D           C            D           A
+ virginica            D           D            D           A
+ virginica            A           C            D           D
+ virginica            A           C            A           A
+ virginica            A           B            D           C
+ virginica            D           C            D           D
+ virginica            A           A            D           D
+ virginica            A           A            D           A
+ virginica            A           C            A           A
+ virginica            D           A            D           D
+ virginica            A           A            D           D
+ virginica            D           A            A           D
+ virginica            B           B            A           A
+ virginica            D           A            D           D
+ virginica            A           A            D           D
+ virginica            A           C            A           D
+ virginica            A           B            A           A
+ virginica            A           C            A           A
+ virginica            A           A            D           D
+ virginica            B           C            A           A
+</pre></div>
+</div>
+</div>
+</div>
+<section id="klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-k-means">
+<h4>Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan K-Means<a class="headerlink" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-k-means" title="Link to this heading">#</a></h4>
+<p>Disini saya melakukan klasifikasi Naive Bayes pada data iris hasil diskritisasi menggunakan K-Means, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -----------------------------</span>
+<span class="c1"># Proses Klasifikasi Naive Bayes (CategoricalNB)</span>
+<span class="c1"># -----------------------------</span>
+
+<span class="c1"># Encode nilai kategori A-D ke angka</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_kmeans</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
+
+<span class="c1"># Encode label kelas asli (class)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_kmeans</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split data: 80% train, 20% test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Categorical Naive Bayes</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CategoricalNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi dan evaluasi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Cetak hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       1.00      0.67      0.80         9
+   virginica       0.79      1.00      0.88        11
+
+    accuracy                           0.90        30
+   macro avg       0.93      0.89      0.89        30
+weighted avg       0.92      0.90      0.90        30
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-k-means">
+<h4>Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan K-Means<a class="headerlink" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-k-means" title="Link to this heading">#</a></h4>
+<p>Disini saya melakukan klasifikasi Decision Tree pada data iris hasil diskritisasi menggunakan K-Means, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -----------------------------</span>
+<span class="c1"># Proses Klasifikasi Decision Tree</span>
+<span class="c1"># -----------------------------</span>
+
+<span class="c1"># Encode nilai kategori A-D ke angka</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_kmeans</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
+
+<span class="c1"># Encode label kelas asli (class)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_kmeans</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split data: 80% train, 20% test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Decision Tree</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi dan evaluasi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Visualisasi Decision Tree</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+          <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+          <span class="n">class_names</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+          <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Decision Tree&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       0.88      0.78      0.82         9
+   virginica       0.83      0.91      0.87        11
+
+    accuracy                           0.90        30
+   macro avg       0.90      0.90      0.90        30
+weighted avg       0.90      0.90      0.90        30
+</pre></div>
+</div>
+<img alt="_images/a092562b6b9e5b1277dd2ff47781b8f0a191afe4eee1fbcc321df375d7c45c83.png" src="_images/a092562b6b9e5b1277dd2ff47781b8f0a191afe4eee1fbcc321df375d7c45c83.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simpan ke file CSV</span>
+<span class="n">df_kmeans</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;diskritisasi_iris_kmeans.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="diskritisasi-dataset-iris-menggunakan-equal-width-binning">
+<h3>Diskritisasi Dataset Iris menggunakan Equal-Width Binning<a class="headerlink" href="#diskritisasi-dataset-iris-menggunakan-equal-width-binning" title="Link to this heading">#</a></h3>
+<p>####<strong>Diskritisasi Equal-Width Binning</strong> merupakan metode yang sederhana dan sistematis dalam mengelompokkan data numerik. Berbeda dengan pendekatan seperti K-Means yang mengikuti pola distribusi data, metode ini membagi rentang nilai data secara merata. Proses dimulai dengan mengidentifikasi nilai minimum dan maksimum dari data, kemudian menghitung selisihnya. Selisih ini dibagi dengan jumlah bin yang diinginkan untuk memperoleh lebar yang sama pada tiap bin. Contohnya, jika data memiliki nilai terendah 12 dan tertinggi 40, dan ingin dibagi menjadi 3 kelompok, maka lebar masing-masing bin adalah (40 - 12) / 3 = 9,33. Maka, kelompok pertama berisi nilai dari 12 hingga sekitar 21,33; kelompok kedua dari 21,33 hingga 30,66; dan kelompok ketiga dari 30,66 hingga 40.</p>
+<p>Setelah interval-interval ini ditetapkan, setiap data akan ditempatkan ke dalam bin sesuai dengan nilainya. Untuk memudahkan analisis atau klasifikasi, tiap bin dapat diberi nama seperti “Rendah”, “Sedang”, dan “Tinggi”. Metode ini sangat praktis dan cepat digunakan, terutama saat eksplorasi awal data dengan distribusi yang cukup merata. Namun, kekurangannya adalah metode ini tidak mempertimbangkan sebaran nyata data. Jika data terkonsentrasi pada rentang tertentu, maka ada bin yang bisa menjadi sangat padat dan bin lainnya justru kosong. Karena itu, Equal-Width Binning lebih tepat digunakan ketika distribusi data cenderung seragam, atau ketika kemudahan implementasi menjadi pertimbangan utama.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi diskritisasi equal-width</span>
+<span class="k">def</span> <span class="nf">equiwidth_discretize</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">min_val</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span><span class="p">)</span> <span class="o">/</span> <span class="n">m</span>
+
+    <span class="c1"># Buat batas-batas bin</span>
+    <span class="n">bin_edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_val</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">width</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+    <span class="c1"># Diskritisasi: untuk setiap nilai, cari bin index</span>
+    <span class="n">bin_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bin_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">bin_indices</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">label_map</span><span class="p">)</span>
+
+<span class="c1"># Buat DataFrame hasil diskritisasi</span>
+<span class="n">df_equal_width</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;sepal_length&#39;</span><span class="p">:</span> <span class="n">equiwidth_discretize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;sepal_width&#39;</span><span class="p">:</span>  <span class="n">equiwidth_discretize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;petal_length&#39;</span><span class="p">:</span> <span class="n">equiwidth_discretize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;petal_width&#39;</span><span class="p">:</span>  <span class="n">equiwidth_discretize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal width (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Tambahkan label kelas di depan</span>
+<span class="n">df_equal_width</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="c1"># Tampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_equal_width</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     class sepal_length sepal_width petal_length petal_width
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           B            A           A
+    setosa            A           B            A           A
+    setosa            A           C            A           A
+    setosa            B           D            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           B            A           A
+    setosa            B           C            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           B            A           A
+    setosa            B           D            A           A
+    setosa            B           D            A           A
+    setosa            B           D            A           A
+    setosa            A           C            A           A
+    setosa            B           C            A           A
+    setosa            A           C            A           A
+    setosa            B           C            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           B            A           A
+    setosa            B           C            A           A
+    setosa            A           D            A           A
+    setosa            B           D            A           A
+    setosa            A           B            A           A
+    setosa            A           B            A           A
+    setosa            B           C            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           A            A           A
+    setosa            A           B            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            A           C            A           A
+    setosa            A           B            A           A
+    setosa            B           C            A           A
+    setosa            A           C            A           A
+versicolor            C           B            C           C
+versicolor            C           B            C           C
+versicolor            C           B            C           C
+versicolor            B           A            C           B
+versicolor            C           B            C           C
+versicolor            B           B            C           B
+versicolor            C           C            C           C
+versicolor            A           A            B           B
+versicolor            C           B            C           B
+versicolor            A           B            B           C
+versicolor            A           A            B           B
+versicolor            B           B            C           C
+versicolor            B           A            C           B
+versicolor            B           B            C           C
+versicolor            B           B            B           B
+versicolor            C           B            C           C
+versicolor            B           B            C           C
+versicolor            B           B            C           B
+versicolor            C           A            C           C
+versicolor            B           A            B           B
+versicolor            B           B            C           C
+versicolor            B           B            C           B
+versicolor            C           A            C           C
+versicolor            B           B            C           B
+versicolor            C           B            C           B
+versicolor            C           B            C           C
+versicolor            C           B            C           C
+versicolor            C           B            C           C
+versicolor            B           B            C           C
+versicolor            B           A            B           B
+versicolor            B           A            B           B
+versicolor            B           A            B           B
+versicolor            B           B            B           B
+versicolor            B           B            C           C
+versicolor            B           B            C           C
+versicolor            B           C            C           C
+versicolor            C           B            C           C
+versicolor            C           A            C           B
+versicolor            B           B            C           B
+versicolor            B           A            C           B
+versicolor            B           A            C           B
+versicolor            B           B            C           C
+versicolor            B           A            C           B
+versicolor            A           A            B           B
+versicolor            B           B            C           B
+versicolor            B           B            C           B
+versicolor            B           B            C           B
+versicolor            C           B            C           B
+versicolor            A           A            B           B
+versicolor            B           B            C           B
+ virginica            C           C            D           D
+ virginica            B           B            C           C
+ virginica            D           B            D           D
+ virginica            C           B            D           C
+ virginica            C           B            D           D
+ virginica            D           B            D           D
+ virginica            A           A            C           C
+ virginica            D           B            D           C
+ virginica            C           A            D           C
+ virginica            D           C            D           D
+ virginica            C           B            C           D
+ virginica            C           B            C           C
+ virginica            C           B            D           D
+ virginica            B           A            C           D
+ virginica            B           B            C           D
+ virginica            C           B            C           D
+ virginica            C           B            D           C
+ virginica            D           C            D           D
+ virginica            D           A            D           D
+ virginica            B           A            C           C
+ virginica            C           B            D           D
+ virginica            B           B            C           D
+ virginica            D           B            D           D
+ virginica            C           B            C           C
+ virginica            C           C            D           D
+ virginica            D           B            D           C
+ virginica            C           B            C           C
+ virginica            B           B            C           C
+ virginica            C           B            D           D
+ virginica            D           B            D           C
+ virginica            D           B            D           C
+ virginica            D           C            D           D
+ virginica            C           B            D           D
+ virginica            C           B            C           C
+ virginica            B           A            D           C
+ virginica            D           B            D           D
+ virginica            C           C            D           D
+ virginica            C           B            D           C
+ virginica            B           B            C           C
+ virginica            C           B            C           D
+ virginica            C           B            D           D
+ virginica            C           B            C           D
+ virginica            B           B            C           C
+ virginica            C           B            D           D
+ virginica            C           C            D           D
+ virginica            C           B            C           D
+ virginica            C           A            C           C
+ virginica            C           B            C           D
+ virginica            C           C            C           D
+ virginica            B           B            C           C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simpan ke file CSV</span>
+<span class="n">df_equal_width</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;diskritisasi_iris_equalwidth.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width">
+<h4>Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan Equal-Width<a class="headerlink" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width" title="Link to this heading">#</a></h4>
+<p>Disini saya melakukan klasifikasi Naive Bayes pada data iris hasil diskritisasi menggunakan Equal-Width Binning, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -----------------------------</span>
+<span class="c1"># Proses Klasifikasi Naive Bayes (CategoricalNB)</span>
+<span class="c1"># -----------------------------</span>
+
+<span class="c1"># Encode nilai kategori A-D ke angka</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_equal_width</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
+
+<span class="c1"># Encode label kelas asli (class)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_equal_width</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split data: 80% train, 20% test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Categorical Naive Bayes</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CategoricalNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi dan evaluasi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Cetak hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9333333333333333
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       0.89      0.89      0.89         9
+   virginica       0.91      0.91      0.91        11
+
+    accuracy                           0.93        30
+   macro avg       0.93      0.93      0.93        30
+weighted avg       0.93      0.93      0.93        30
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width-binning">
+<h4>Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan Equal-Width Binning<a class="headerlink" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width-binning" title="Link to this heading">#</a></h4>
+<p>Disini saya melakukan klasifikasi Decision Tree pada data iris hasil diskritisasi menggunakan Equal-Width Binning, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -----------------------------</span>
+<span class="c1"># Proses Klasifikasi Decision Tree</span>
+<span class="c1"># -----------------------------</span>
+
+<span class="c1"># Encode nilai kategori A-D ke angka</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_equal_width</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
+
+<span class="c1"># Encode label kelas asli (class)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_equal_width</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split data: 80% train, 20% test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Decision Tree</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi dan evaluasi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Visualisasi Decision Tree</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+          <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+          <span class="n">class_names</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+          <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Decision Tree&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9666666666666667
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       0.90      1.00      0.95         9
+   virginica       1.00      0.91      0.95        11
+
+    accuracy                           0.97        30
+   macro avg       0.97      0.97      0.97        30
+weighted avg       0.97      0.97      0.97        30
+</pre></div>
+</div>
+<img alt="_images/5c38230930373fa186d86638c30504186d5e96857c3ab277f794f559ef68a83e.png" src="_images/5c38230930373fa186d86638c30504186d5e96857c3ab277f794f559ef68a83e.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="diskritisasi-dataset-iris-menggunakan-equal-frequency-binning">
+<h3>Diskritisasi Dataset Iris menggunakan Equal-Frequency Binning<a class="headerlink" href="#diskritisasi-dataset-iris-menggunakan-equal-frequency-binning" title="Link to this heading">#</a></h3>
+<p>####<strong>Equal-Frequency Binning</strong>, atau diskritisasi berbasis kuantil, merupakan metode yang mengelompokkan data berdasarkan jumlah item dalam tiap kelompok, bukan berdasarkan rentang nilai seperti pada Equal-Width. Dalam metode ini, data terlebih dahulu diurutkan dari nilai terkecil hingga terbesar. Setelah itu, data dibagi menjadi beberapa bin yang masing-masing berisi jumlah data yang kurang lebih sama. Sebagai contoh, jika data ingin dibagi ke dalam empat bin, maka setiap bin akan mencakup sekitar 25% dari total data. Batas antar-bin ditentukan dengan menggunakan nilai kuantil, seperti Q1 (25%), Q2 (median), dan Q3 (75%).</p>
+<p>Kelebihan utama dari pendekatan ini adalah kemampuannya menjaga jumlah data yang seimbang dalam setiap bin. Hal ini sangat bermanfaat dalam pelatihan model machine learning karena dapat menghindari ketimpangan yang menyebabkan bias pada model—misalnya jika ada satu bin yang terlalu sedikit datanya. Namun, metode ini juga memiliki kekurangan. Karena fokusnya pada jumlah data, maka lebar rentang nilai antar-bin bisa bervariasi secara signifikan. Ada bin yang mencakup rentang sangat sempit, sementara bin lainnya sangat lebar, sehingga bisa menyulitkan dalam interpretasi dan visualisasi. Meskipun begitu, Equal-Frequency Binning tetap menjadi pilihan yang baik saat keseimbangan jumlah data per kelompok dianggap lebih penting daripada keseragaman interval nilai.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi manual untuk equal-frequency discretization</span>
+<span class="k">def</span> <span class="nf">discretize_cdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">data_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_sorted</span><span class="p">)</span>
+    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span>
+
+    <span class="c1"># Hitung batas kuantil</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">k</span> <span class="o">/</span> <span class="n">m</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q</span>
+        <span class="n">floor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">ceil</span> <span class="o">=</span> <span class="n">floor</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">frac</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="n">floor</span>
+        <span class="k">if</span> <span class="n">ceil</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">data_sorted</span><span class="p">[</span><span class="n">floor</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">data_sorted</span><span class="p">[</span><span class="n">floor</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">data_sorted</span><span class="p">[</span><span class="n">ceil</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_sorted</span><span class="p">[</span><span class="n">floor</span><span class="p">])</span> <span class="o">*</span> <span class="n">frac</span>
+        <span class="n">thresholds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="n">thresholds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+
+    <span class="c1"># Tentukan label bin untuk setiap nilai</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">thresholds</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">thresholds</span><span class="p">[</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">thresholds</span><span class="p">[</span><span class="n">b</span><span class="p">]:</span>
+                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_map</span><span class="p">[</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">labels</span>
+
+<span class="c1"># Terapkan discretization ke setiap kolom</span>
+<span class="n">df_equal_frequency</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;sepal_length&#39;</span><span class="p">:</span> <span class="n">discretize_cdf</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;sepal_width&#39;</span><span class="p">:</span>  <span class="n">discretize_cdf</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;petal_length&#39;</span><span class="p">:</span> <span class="n">discretize_cdf</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal length (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;petal_width&#39;</span><span class="p">:</span>  <span class="n">discretize_cdf</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;petal width (cm)&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Tambahkan kolom kelas di depan</span>
+<span class="n">df_equal_frequency</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="c1"># Tampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_equal_frequency</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     class sepal_length sepal_width petal_length petal_width
+    setosa            B           D            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            A           D            A           A
+    setosa            B           D            B           B
+    setosa            A           D            A           B
+    setosa            A           D            A           A
+    setosa            A           B            A           A
+    setosa            A           C            A           A
+    setosa            B           D            A           A
+    setosa            A           D            B           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            C           D            A           A
+    setosa            B           D            A           B
+    setosa            B           D            A           B
+    setosa            B           D            A           B
+    setosa            B           D            B           B
+    setosa            B           D            A           B
+    setosa            B           D            B           A
+    setosa            B           D            A           B
+    setosa            A           D            A           A
+    setosa            B           D            B           B
+    setosa            A           D            B           A
+    setosa            A           C            B           A
+    setosa            A           D            B           B
+    setosa            B           D            A           A
+    setosa            B           D            A           A
+    setosa            A           C            B           A
+    setosa            A           C            B           A
+    setosa            B           D            A           B
+    setosa            B           D            A           A
+    setosa            B           D            A           A
+    setosa            A           C            A           A
+    setosa            A           C            A           A
+    setosa            B           D            A           A
+    setosa            A           D            A           A
+    setosa            A           C            A           A
+    setosa            B           D            A           A
+    setosa            A           D            A           B
+    setosa            A           A            A           B
+    setosa            A           C            A           A
+    setosa            A           D            B           B
+    setosa            B           D            B           B
+    setosa            A           C            A           B
+    setosa            B           D            B           A
+    setosa            A           C            A           A
+    setosa            B           D            A           A
+    setosa            A           D            A           A
+versicolor            D           C            C           C
+versicolor            D           C            C           C
+versicolor            D           C            C           C
+versicolor            B           A            B           C
+versicolor            D           B            C           C
+versicolor            B           B            C           C
+versicolor            C           D            C           C
+versicolor            A           A            B           B
+versicolor            D           B            C           C
+versicolor            B           A            B           C
+versicolor            A           A            B           B
+versicolor            C           C            B           C
+versicolor            C           A            B           B
+versicolor            C           B            C           C
+versicolor            B           B            B           C
+versicolor            D           C            C           C
+versicolor            B           C            C           C
+versicolor            C           A            B           B
+versicolor            C           A            C           C
+versicolor            B           A            B           B
+versicolor            C           C            C           D
+versicolor            C           B            B           C
+versicolor            C           A            C           C
+versicolor            C           B            C           B
+versicolor            D           B            B           C
+versicolor            D           C            C           C
+versicolor            D           B            C           C
+versicolor            D           C            C           C
+versicolor            C           B            C           C
+versicolor            B           A            B           B
+versicolor            B           A            B           B
+versicolor            B           A            B           B
+versicolor            C           A            B           B
+versicolor            C           A            D           C
+versicolor            B           C            C           C
+versicolor            C           D            C           C
+versicolor            D           C            C           C
+versicolor            C           A            C           C
+versicolor            B           C            B           C
+versicolor            B           A            B           C
+versicolor            B           A            C           B
+versicolor            C           C            C           C
+versicolor            C           A            B           B
+versicolor            A           A            B           B
+versicolor            B           A            B           C
+versicolor            B           C            B           B
+versicolor            B           B            B           C
+versicolor            C           B            B           C
+versicolor            B           A            B           B
+versicolor            B           B            B           C
+ virginica            C           D            D           D
+ virginica            C           A            D           D
+ virginica            D           C            D           D
+ virginica            C           B            D           D
+ virginica            D           C            D           D
+ virginica            D           C            D           D
+ virginica            A           A            C           C
+ virginica            D           B            D           D
+ virginica            D           A            D           D
+ virginica            D           D            D           D
+ virginica            D           C            D           D
+ virginica            D           A            D           D
+ virginica            D           C            D           D
+ virginica            B           A            C           D
+ virginica            C           B            D           D
+ virginica            D           C            D           D
+ virginica            D           C            D           D
+ virginica            D           D            D           D
+ virginica            D           A            D           D
+ virginica            C           A            C           C
+ virginica            D           C            D           D
+ virginica            B           B            C           D
+ virginica            D           B            D           D
+ virginica            C           A            C           D
+ virginica            D           D            D           D
+ virginica            D           C            D           D
+ virginica            C           B            C           D
+ virginica            C           C            C           D
+ virginica            D           B            D           D
+ virginica            D           C            D           C
+ virginica            D           B            D           D
+ virginica            D           D            D           D
+ virginica            D           B            D           D
+ virginica            C           B            D           C
+ virginica            C           A            D           C
+ virginica            D           C            D           D
+ virginica            C           D            D           D
+ virginica            D           C            D           D
+ virginica            C           C            C           D
+ virginica            D           C            D           D
+ virginica            D           C            D           D
+ virginica            D           C            D           D
+ virginica            C           A            D           D
+ virginica            D           C            D           D
+ virginica            D           D            D           D
+ virginica            D           C            D           D
+ virginica            C           A            C           D
+ virginica            D           C            D           D
+ virginica            C           D            D           D
+ virginica            C           C            D           D
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simpan ke file CSV</span>
+<span class="n">df_equal_frequency</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;diskritisasi_iris_equalfrequency.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency">
+<h4>Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan Equal-Frequency<a class="headerlink" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency" title="Link to this heading">#</a></h4>
+<p>Disini saya melakukan klasifikasi Naive Bayes pada data iris hasil diskritisasi menggunakan Equal-Frequency Binning, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -----------------------------</span>
+<span class="c1"># Proses Klasifikasi Naive Bayes (CategoricalNB)</span>
+<span class="c1"># -----------------------------</span>
+
+<span class="c1"># Encode nilai kategori A-D ke angka</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_equal_frequency</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
+
+<span class="c1"># Encode label kelas asli (class)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_equal_frequency</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split data: 80% train, 20% test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Categorical Naive Bayes</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">CategoricalNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi dan evaluasi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Cetak hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 1.0
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       1.00      1.00      1.00         9
+   virginica       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency">
+<h4>Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan Equal-Frequency<a class="headerlink" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency" title="Link to this heading">#</a></h4>
+<p>Disini saya melakukan klasifikasi Decision Tree pada data iris hasil diskritisasi menggunakan Equal-Frequency Binning, untuk mencari akurasi data iris</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -----------------------------</span>
+<span class="c1"># Proses Klasifikasi Decision Tree</span>
+<span class="c1"># -----------------------------</span>
+
+<span class="c1"># Encode nilai kategori A-D ke angka</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_equal_frequency</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">)</span>
+
+<span class="c1"># Encode label kelas asli (class)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_equal_frequency</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split data: 80% train, 20% test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Buat dan latih model Decision Tree</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi dan evaluasi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Laporan Klasifikasi:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Visualisasi Decision Tree</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+          <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+          <span class="n">class_names</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+          <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Decision Tree&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9666666666666667
+
+Laporan Klasifikasi:
+               precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       0.90      1.00      0.95         9
+   virginica       1.00      0.91      0.95        11
+
+    accuracy                           0.97        30
+   macro avg       0.97      0.97      0.97        30
+weighted avg       0.97      0.97      0.97        30
+</pre></div>
+</div>
+<img alt="_images/ac873171314d913c119c64b4d0a0ab6c612bdb4231f06529977a510f794feccf.png" src="_images/ac873171314d913c119c64b4d0a0ab6c612bdb4231f06529977a510f794feccf.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="perbandingan-akurasi">
+<h3>Perbandingan Akurasi<a class="headerlink" href="#perbandingan-akurasi" title="Link to this heading">#</a></h3>
+<p>Data iris asli</p>
+<ul class="simple">
+<li><p>Naive Bayes = 100 %</p></li>
+<li><p>Decision Tree = 100 %</p></li>
+</ul>
+<p>Data iris hasil diskritisasi menggunakan Kmeans</p>
+<ul class="simple">
+<li><p>Naive Bayes = 90 %</p></li>
+<li><p>Decision Tree = 90 %</p></li>
+</ul>
+<p>Data iris hasil diskritisasi menggunakan Equal-Width Binning</p>
+<ul class="simple">
+<li><p>Naive Bayes = 93,33 %</p></li>
+<li><p>Decision Tree = 96,67 %</p></li>
+</ul>
+<p>Data iris hasil diskritisasi menggunakan Equal-Frequency Binning</p>
+<ul class="simple">
+<li><p>Naive Bayes = 100 %</p></li>
+<li><p>Decision Tree = 96,67 %</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Decision_Tree.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Decision Tree</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#library-yang-digunakan">Library yang digunakan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ambil-data-iris-asli">Ambil data iris asli</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-asli">Klasifikasi Naive Bayes pada Data Iris asli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-asli">Klasifikasi Decision Tree pada Data Iris asli</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris">Diskritisasi Dataset Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris-menggunakan-k-means">Diskritisasi Dataset Iris menggunakan K-Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-k-means">Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan K-Means</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-k-means">Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan K-Means</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris-menggunakan-equal-width-binning">Diskritisasi Dataset Iris menggunakan Equal-Width Binning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width">Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan Equal-Width</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-width-binning">Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan Equal-Width Binning</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diskritisasi-dataset-iris-menggunakan-equal-frequency-binning">Diskritisasi Dataset Iris menggunakan Equal-Frequency Binning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-naive-bayes-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency">Klasifikasi Naive Bayes pada Data Iris hasil Diskritisasi menggunakan Equal-Frequency</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-decision-tree-pada-data-iris-hasil-diskritisasi-menggunakan-equal-frequency">Klasifikasi Decision Tree pada Data Iris hasil Diskritisasi menggunakan Equal-Frequency</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-akurasi">Perbandingan Akurasi</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mochammad Iqbal Dwi Cahyo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
