@@ -10,12 +10,12 @@ import sys
 def print_header():
     """Menampilkan header aplikasi"""
     print("="*60)
-    print("🚀 DEPLOYMENT HELPER - ANALISIS DATA & MODEL")
+    print("DEPLOYMENT HELPER - ANALISIS DATA & MODEL")
     print("="*60)
 
 def check_files():
     """Memeriksa file yang diperlukan untuk deployment"""
-    print("\n📋 Memeriksa file yang diperlukan...")
+    print("\nMemeriksa file yang diperlukan...")
     
     required_files = [
         'aplikasi_web.py',
@@ -33,52 +33,52 @@ def check_files():
     missing_files = []
     for file in required_files:
         if os.path.exists(file):
-            print(f"✅ {file}")
+            print(f"  {file}")
         else:
-            print(f"❌ {file} - TIDAK DITEMUKAN")
+            print(f"  {file} - TIDAK DITEMUKAN")
             missing_files.append(file)
     
     if missing_files:
-        print(f"\n⚠️  Warning: {len(missing_files)} file tidak ditemukan!")
+        print(f"\nWarning: {len(missing_files)} file tidak ditemukan!")
         return False
     else:
-        print(f"\n✅ Semua file diperlukan sudah tersedia!")
+        print(f"\nSemua file diperlukan sudah tersedia!")
         return True
 
 def create_git_repo():
     """Membuat repository Git"""
-    print("\n🔧 Menyiapkan repository Git...")
+    print("\nMenyiapkan repository Git...")
     
     try:
         # Inisialisasi Git repository
         subprocess.run(['git', 'init'], check=True)
-        print("✅ Git repository diinisialisasi")
+        print("Git repository diinisialisasi")
         
         # Tambahkan semua file
         subprocess.run(['git', 'add', '.'], check=True)
-        print("✅ File ditambahkan ke staging area")
+        print("File ditambahkan ke staging area")
         
         # Commit pertama
         subprocess.run(['git', 'commit', '-m', 'Initial commit: Analisis Data & Model Deployment'], check=True)
-        print("✅ Commit pertama dibuat")
+        print("Commit pertama dibuat")
         
         return True
         
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error saat menyiapkan Git: {e}")
+        print(f"Error saat menyiapkan Git: {e}")
         return False
     except FileNotFoundError:
-        print("❌ Git tidak ditemukan. Silakan install Git terlebih dahulu.")
+        print("Git tidak ditemukan. Silakan install Git terlebih dahulu.")
         return False
 
 def show_deployment_options():
     """Menampilkan opsi deployment"""
-    print("\n🌐 PILIHAN PLATFORM DEPLOYMENT:")
+    print("\nPILIHAN PLATFORM DEPLOYMENT:")
     print("="*50)
     
     platforms = [
         {
-            "name": "🚀 Streamlit Cloud",
+            "name": "Streamlit Cloud",
             "url": "https://share.streamlit.io/",
             "description": "Platform terbaik untuk aplikasi Streamlit",
             "steps": [
@@ -90,7 +90,7 @@ def show_deployment_options():
             ]
         },
         {
-            "name": "⚡ Render",
+            "name": "Render",
             "url": "https://render.com/",
             "description": "Platform cloud yang mudah digunakan",
             "steps": [
@@ -102,7 +102,7 @@ def show_deployment_options():
             ]
         },
         {
-            "name": "🚂 Railway",
+            "name": "Railway",
             "url": "https://railway.app/",
             "description": "Platform deployment yang cepat",
             "steps": [
@@ -112,7 +112,7 @@ def show_deployment_options():
             ]
         },
         {
-            "name": "🦸 Heroku",
+            "name": "Heroku",
             "url": "https://heroku.com/",
             "description": "Platform cloud yang powerful",
             "steps": [
@@ -134,7 +134,7 @@ def show_deployment_options():
 
 def show_github_pages_option():
     """Menampilkan opsi GitHub Pages untuk web statis"""
-    print("\n📄 GITHUB PAGES (UNTUK WEB STATIS):")
+    print("\nGITHUB PAGES (UNTUK WEB STATIS):")
     print("="*50)
     print("Untuk menampilkan hasil analisis sebagai web statis:")
     print("1. Upload semua file ke GitHub repository")
@@ -146,21 +146,20 @@ def show_github_pages_option():
 
 def create_deployment_script():
     """Membuat script deployment otomatis"""
-    print("\n🔧 Membuat script deployment...")
+    print("\nMembuat script deployment...")
     
     # Script untuk Streamlit Cloud
-    streamlit_script = """#!/bin/bash
-# Script deployment untuk Streamlit Cloud
-echo "🚀 Deploying ke Streamlit Cloud..."
+    streamlit_script = """# Script deployment untuk Streamlit Cloud
+echo "Deploying ke Streamlit Cloud..."
 
 # Pastikan semua file ada
 if [ ! -f "aplikasi_web.py" ]; then
-    echo "❌ File aplikasi_web.py tidak ditemukan!"
+    echo "File aplikasi_web.py tidak ditemukan!"
     exit 1
 fi
 
 if [ ! -f "requirements.txt" ]; then
-    echo "❌ File requirements.txt tidak ditemukan!"
+    echo "File requirements.txt tidak ditemukan!"
     exit 1
 fi
 
@@ -169,29 +168,28 @@ git add .
 git commit -m "Update untuk deployment"
 git push origin main
 
-echo "✅ Repository berhasil diupdate!"
-echo "🌐 Sekarang buka https://share.streamlit.io/"
-echo "🔗 Login dengan GitHub dan pilih repository ini"
-echo "📁 Set path ke: aplikasi_web.py"
-echo "🚀 Klik Deploy!"
+echo "Repository berhasil diupdate!"
+echo "Sekarang buka https://share.streamlit.io/"
+echo "Login dengan GitHub dan pilih repository ini"
+echo "Set path ke: aplikasi_web.py"
+echo "Klik Deploy!"
 """
     
-    with open('deploy_streamlit.sh', 'w') as f:
+    with open('deploy_streamlit.sh', 'w', encoding='utf-8') as f:
         f.write(streamlit_script)
     
     # Script untuk Render
-    render_script = """#!/bin/bash
-# Script deployment untuk Render
-echo "⚡ Deploying ke Render..."
+    render_script = """# Script deployment untuk Render
+echo "Deploying ke Render..."
 
 # Pastikan semua file ada
 if [ ! -f "aplikasi_web.py" ]; then
-    echo "❌ File aplikasi_web.py tidak ditemukan!"
+    echo "File aplikasi_web.py tidak ditemukan!"
     exit 1
 fi
 
 if [ ! -f "requirements.txt" ]; then
-    echo "❌ File requirements.txt tidak ditemukan!"
+    echo "File requirements.txt tidak ditemukan!"
     exit 1
 fi
 
@@ -200,18 +198,18 @@ git add .
 git commit -m "Update untuk deployment Render"
 git push origin main
 
-echo "✅ Repository berhasil diupdate!"
-echo "🌐 Sekarang buka https://render.com/"
-echo "🔗 Buat akun dan connect GitHub repository"
-echo "⚙️  Set build command: pip install -r requirements.txt"
-echo "🚀 Set start command: streamlit run aplikasi_web.py"
-echo "📱 Klik Deploy!"
+echo "Repository berhasil diupdate!"
+echo "Sekarang buka https://render.com/"
+echo "Buat akun dan connect GitHub repository"
+echo "Set build command: pip install -r requirements.txt"
+echo "Set start command: streamlit run aplikasi_web.py"
+echo "Klik Deploy!"
 """
     
-    with open('deploy_render.sh', 'w') as f:
+    with open('deploy_render.sh', 'w', encoding='utf-8') as f:
         f.write(render_script)
     
-    print("✅ Script deployment dibuat:")
+    print("Script deployment dibuat:")
     print("   - deploy_streamlit.sh (untuk Streamlit Cloud)")
     print("   - deploy_render.sh (untuk Render)")
 
@@ -221,13 +219,13 @@ def main():
     
     # Periksa file
     if not check_files():
-        print("\n❌ Beberapa file diperlukan tidak ditemukan!")
+        print("\nBeberapa file diperlukan tidak ditemukan!")
         print("Silakan jalankan analisis terlebih dahulu dengan:")
         print("python analisis_data.py")
         return
     
     # Tanya user apa yang ingin dilakukan
-    print("\n🎯 APA YANG INGIN ANDA LAKUKAN?")
+    print("\nAPA YANG INGIN ANDA LAKUKAN?")
     print("1. Siapkan repository Git")
     print("2. Lihat opsi deployment")
     print("3. Buat script deployment")
@@ -249,14 +247,14 @@ def main():
         show_github_pages_option()
         create_deployment_script()
     elif choice == "5":
-        print("\n👋 Terima kasih!")
+        print("\nTerima kasih!")
         return
     else:
-        print("❌ Pilihan tidak valid!")
+        print("Pilihan tidak valid!")
         return
     
     print("\n" + "="*60)
-    print("✅ SELESAI! Silakan ikuti langkah-langkah di atas.")
+    print("SELESAI! Silakan ikuti langkah-langkah di atas.")
     print("="*60)
 
 if __name__ == "__main__":
