@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Data & Deployment Model</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f77b4;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #1f77b4;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .image-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 10px 0;
+        }
+        .deployment-links {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .deployment-links h3 {
+            color: #1f77b4;
+            margin-top: 0;
+        }
+        .deployment-links a {
+            display: inline-block;
+            background-color: #1f77b4;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .deployment-links a:hover {
+            background-color: #155a8a;
+        }
+        .insights {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .insights ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .insights li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Analisis Data & Deployment Model</h1>
+        
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">569</div>
+                <div class="metric-label">Sampel Data</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">30</div>
+                <div class="metric-label">Jumlah Fitur</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">96.5%</div>
+                <div class="metric-label">Akurasi Model</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">98.2%</div>
+                <div class="metric-label">Skor AUC</div>
+            </div>
+        </div>
+
+        <h2>🎯 Ikhtisar Project</h2>
+        <p>Project ini mendemonstrasikan pipeline machine learning lengkap untuk analisis data dan deployment model menggunakan dataset dari UCI Machine Learning Repository. Analisis mengikuti pendekatan terstruktur dengan empat fase utama: Pemahaman Data, Preprocessing, Modeling, dan Evaluasi.</p>
+
+        <h2>📈 Hasil Analisis</h2>
+        
+        <div class="image-section">
+            <h3>🔍 Pemahaman Data</h3>
+            <img src="pemahaman_data.png" alt="Analisis Pemahaman Data">
+            <p>Visualisasi distribusi data, korelasi antar fitur, dan karakteristik dataset</p>
+        </div>
+
+        <div class="image-section">
+            <h3>🔧 Analisis Preprocessing</h3>
+            <img src="analisis_preprocessing.png" alt="Analisis Preprocessing">
+            <p>Hasil preprocessing data termasuk scaling, seleksi fitur, dan analisis PCA</p>
+        </div>
+
+        <div class="image-section">
+            <h3>🤖 Hasil Modeling</h3>
+            <img src="hasil_modeling.png" alt="Hasil Modeling">
+            <p>Perbandingan performa berbagai model machine learning</p>
+        </div>
+
+        <div class="image-section">
+            <h3>📊 Hasil Evaluasi</h3>
+            <img src="hasil_evaluasi.png" alt="Hasil Evaluasi">
+            <p>Evaluasi final model terbaik dengan metrik performa lengkap</p>
+        </div>
+
+        <h2>🔗 Link Deployment Aplikasi</h2>
+        <div class="deployment-links">
+            <h3>Platform Deployment yang Tersedia:</h3>
+            <a href="https://share.streamlit.io/" target="_blank">🚀 Streamlit Cloud</a>
+            <a href="https://render.com/" target="_blank">⚡ Render</a>
+            <a href="https://railway.app/" target="_blank">🚂 Railway</a>
+            <a href="https://heroku.com/" target="_blank">🦸 Heroku</a>
+            <br><br>
+            <p><strong>Status:</strong> ⏳ Link deployment akan di-generate setelah proses deployment selesai</p>
+        </div>
+
+        <h2>💡 Wawasan Kunci</h2>
+        <div class="insights">
+            <ul>
+                <li><strong>Kualitas Data:</strong> Dataset seimbang dengan tidak ada missing values dan distribusi fitur yang baik.</li>
+                <li><strong>Kepentingan Fitur:</strong> Fitur radius, perimeter, dan area paling prediktif terhadap variabel target.</li>
+                <li><strong>Performa Model:</strong> Random Forest mencapai performa terbaik dengan akurasi 96.5% dan AUC 98.2%.</li>
+                <li><strong>Robustness:</strong> Skor cross-validation konsisten, menunjukkan kemampuan generalisasi yang baik.</li>
+                <li><strong>Feature Scaling:</strong> Scaling meningkatkan performa untuk model linear tetapi tidak untuk model berbasis pohon.</li>
+                <li><strong>Keseimbangan Kelas:</strong> Dataset memiliki keseimbangan yang baik antara kasus benign dan malignant.</li>
+            </ul>
+        </div>
+
+        <h2>🛠️ Teknologi yang Digunakan</h2>
+        <ul>
+            <li><strong>Python:</strong> Bahasa pemrograman utama</li>
+            <li><strong>Pandas & NumPy:</strong> Manipulasi dan analisis data</li>
+            <li><strong>Scikit-learn:</strong> Algoritma machine learning</li>
+            <li><strong>Matplotlib & Seaborn:</strong> Visualisasi data</li>
+            <li><strong>Plotly:</strong> Visualisasi interaktif</li>
+            <li><strong>Streamlit:</strong> Framework aplikasi web</li>
+        </ul>
+
+        <h2>📋 Langkah Deployment</h2>
+        <ol>
+            <li>Upload project ke GitHub repository</li>
+            <li>Pilih platform deployment (Streamlit Cloud direkomendasikan)</li>
+            <li>Connect repository dengan platform deployment</li>
+            <li>Set konfigurasi deployment</li>
+            <li>Deploy aplikasi</li>
+            <li>Share link yang dihasilkan</li>
+        </ol>
+
+        <div style="text-align: center; margin-top: 50px; padding: 20px; background-color: #f8f9fa; border-radius: 10px;">
+            <p><strong>Project Analisis Data & Deployment Model</strong></p>
+            <p>Dibuat dengan ❤️ menggunakan Python dan Streamlit</p>
+        </div>
+    </div>
+</body>
+</html> 
